@@ -154,9 +154,96 @@ export default function LandingPage() {
             </Card>
           </div>
         </section>
-        <section className="mt-24"> bitch wassup</section>
+        <section className="mt-12 md:mt-24 relative w-full overflow-hidden rounded-2xl">
+          <Image
+            src="/hero-bgg.jpg"
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="max-w-lg text-left">
+              <h2 className="text-3xl font-krona font-light mb-4">
+                Join a Thriving Community of Mentors and Mentees
+              </h2>
+              <p className="text-slate-200 mb-6">
+                As a mentor earn money while sharing your expertise, and as a
+                mentee, gain invaluable insights and guidance to accelerate your
+                career growth.
+              </p>
+              <Button className="mt-4" size="lg" variant="outline">
+                Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-2"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Button>
+              <p className="text-slate-200 mt-4">
+                Thousands of users have already experienced power of our App!
+              </p>
+              <div className="flex -space-x-3 mt-6">
+                <CardProfilePic>
+                  <img
+                    src="isabella-ekeson.jpg"
+                    alt="profile picture of Isabella Ekeson"
+                  />
+                </CardProfilePic>
+                <CardProfilePic>
+                  <img
+                    src="Ruth-anderson.jpg"
+                    alt="profile picture of Ruth Anderson"
+                  />
+                </CardProfilePic>
+                <CardProfilePic>
+                  <img
+                    src="bryanqueen.png"
+                    alt="profile picture of Bryan Queen"
+                  />
+                </CardProfilePic>
+                <CardProfilePic>
+                  <img
+                    src="ogbonachuks.jpg"
+                    alt="profile picture of Kolu Ogbonochukwu"
+                  />
+                </CardProfilePic>
+                <CardProfilePic>
+                  <img
+                    src="francis-kinley.jpg"
+                    alt="profile picture of Francis Kinley"
+                  />
+                </CardProfilePic>
+                <CardProfilePic>
+                  <span className="flex font-medium items-center justify-center w-full h-full bg-white text-black text-xs rounded-full">
+                    +1k
+                  </span>
+                </CardProfilePic>
+              </div>
+            </div>
+            <div className="hidden md:flex justify-center">
+              <img
+                src="/dashboard-earning.jpg"
+                alt="Mentor earning"
+                className="rounded-2xl w-full object-cover"
+              />
+            </div>
+          </div>
+        </section>
         <section className="mt-12 md:mt-24 w-full">
-          <div className="mt-8 md:mt-12 mb-8 text-center max-w-2xl mx-auto">
+          <div className="mb-8 text-center max-w-2xl mx-auto px-6">
             <Button className="mb-8" size="lg" variant="outline">
               Testimonials
             </Button>
