@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MENTOR
+  MENTEE
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String
+  role          Role      @default(MENTEE)
+  bio           String?
+  skills        String[]
+
+  accounts Account[]
+  sessions Session[]
+
+  // Mentor-specific
+  mentorSessions   MentorSession[] @relation("MentorSessions")
+  menteeSessions   MentorSession[] @relation("MenteeSessions")
+  sentRequests     Request[]       @relation("SentRequests")
+  receivedRequests Request[]       @relation("ReceivedRequests")
+  availability     Availability[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Request {
+  id        String        @id @default(cuid())
+  topic     String
+  message   String?
+  status    RequestStatus @default(PENDING)
+
+  menteeId String
+  mentorId String
+  mentee   User   @relation("SentRequests", fields: [menteeId], references: [id])
+  mentor   User   @relation("ReceivedRequests", fields: [mentorId], references: [id])
+
+  session MentorSession?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum RequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model MentorSession {
+  id        String        @id @default(cuid())
+  topic     String
+  status    SessionStatus @default(SCHEDULED)
+  startTime DateTime
+  endTime   DateTime?
+  notes     String?
+
+  mentorId String
+  menteeId String
+  mentor   User @relation("MentorSessions", fields: [mentorId], references: [id])
+  mentee   User @relation("MenteeSessions", fields: [menteeId], references: [id])
+
+  requestId String?  @unique
+  request   Request? @relation(fields: [requestId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum SessionStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Availability {
+  id        String   @id @default(cuid())
+  dayOfWeek Int // 0=Sunday, 6=Saturday
+  startTime String // "09:00"
+  endTime   String // "17:00"
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
