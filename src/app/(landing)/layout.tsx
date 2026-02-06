@@ -36,12 +36,12 @@ export default function LandingLayout({
           </nav>
           <div className="flex items-center gap-4">
             <div className="flex items-center space-x-4">
-              <Link href="/login">
+              <Link href="/signin">
                 <Button className="text-white" variant="outline">
                   Sign in
                 </Button>
               </Link>
-              <Link href="/register">
+              <Link href="/signup">
                 <Button className="text-black bg-gray-200">Sign up</Button>
               </Link>
             </div>

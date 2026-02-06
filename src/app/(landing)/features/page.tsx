@@ -48,13 +48,13 @@ export default function FeaturesPage() {
           </h2>
           <div className="flex gap-4 justify-center">
             <Link
-              href="/register?role=mentee"
+              href="/signup?role=mentee"
               className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 py-2 text-sm font-medium text-black shadow transition-colors hover:bg-gray-100"
             >
               Find a Mentor
             </Link>
             <Link
-              href="/register?role=mentor"
+              href="/signup?role=mentor"
               className="inline-flex h-10 items-center justify-center rounded-md bg-gray-600 px-8 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700"
             >
               Become a Mentor

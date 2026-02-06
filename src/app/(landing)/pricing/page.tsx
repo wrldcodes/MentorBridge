@@ -30,7 +30,7 @@ export default function PricingPage() {
             { name: "Priority support", included: false },
           ]}
           buttonText="Sign Up as Mentee"
-          buttonLink="/register?role=mentee"
+          buttonLink="/signup?role=mentee"
         />
 
         {/* Premium Mentee Plan */}
@@ -49,7 +49,7 @@ export default function PricingPage() {
             { name: "Priority support", included: true },
           ]}
           buttonText="Upgrade to Premium"
-          buttonLink="/register?role=mentee&plan=premium"
+          buttonLink="/signup?role=mentee&plan=premium"
         />
 
         {/* Mentor Plan */}
@@ -68,7 +68,7 @@ export default function PricingPage() {
             { name: "Priority support", included: false },
           ]}
           buttonText="Become a Mentor"
-          buttonLink="/register?role=mentor"
+          buttonLink="/signup?role=mentor"
           highlighted
           badge="Most Popular"
         />
@@ -89,7 +89,7 @@ export default function PricingPage() {
             { name: "Priority 24/7 support", included: true },
           ]}
           buttonText="Upgrade to Premium"
-          buttonLink="/register?role=mentor&plan=premium"
+          buttonLink="/signup?role=mentor&plan=premium"
         />
       </div>
 
@@ -103,13 +103,13 @@ export default function PricingPage() {
         </p>
         <div className="flex gap-4 justify-center">
           <Link
-            href="/register?role=mentee"
+            href="/signup?role=mentee"
             className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 py-2 text-sm font-medium text-black shadow transition-colors hover:bg-gray-100"
           >
             Find a Mentor
           </Link>
           <Link
-            href="/register?role=mentor"
+            href="/signup?role=mentor"
             className="inline-flex h-10 items-center justify-center rounded-md bg-gray-600 px-8 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700"
           >
             Become a Mentor

@@ -12,42 +12,58 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
+import { signIn, ActionResponse } from "@/app/action/auth";
+
+const initialState: ActionResponse = {
+  success: false,
+  message: "",
+  errors: undefined,
+};
 
 export default function LoginPage() {
   const router = useRouter();
 
   const handleCredentialsSignIn = async (
-    _prevState: string,
+    _prevState: ActionResponse,
     formData: FormData,
-  ) => {
+  ): Promise<ActionResponse> => {
+    // Validate with Zod via server action
+    const result = await signIn(formData);
+
+    if (!result.success) {
+      if (result.message === "USER_NOT_FOUND") {
+        router.push("/signup");
+        return { success: false, message: "" };
+      }
+      return result;
+    }
+
+    // Validation passed — create NextAuth session
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const result = await signIn("credentials", {
+    const authResult = await nextAuthSignIn("credentials", {
       email,
       password,
       redirect: false,
     });
 
-    if (result?.error) {
-      if (result.error.includes("USER_NOT_FOUND")) {
-        router.push("/register");
-        return "";
-      }
-      return result.error.includes("Invalid password")
-        ? "Invalid password. Please try again."
-        : "Something went wrong. Please try again.";
+    if (authResult?.error) {
+      return {
+        success: false,
+        message: "Something went wrong. Please try again.",
+      };
     }
 
     router.push("/dashboard");
-    return "";
+    return { success: true, message: "Authenticated" };
   };
 
-  const [error, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionState(
     handleCredentialsSignIn,
-    "",
+    initialState,
   );
 
   const handleGoogleSignIn = async () => {
@@ -69,8 +85,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
+      <Card className="w-full max-w-md bg-card text-card-foreground border-border">
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Sign in to your account</CardDescription>
@@ -78,7 +94,10 @@ export default function LoginPage() {
         <CardContent className="space-y-4">
           <form action={formAction} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-foreground"
+              >
                 Email
               </label>
               <input
@@ -87,11 +106,14 @@ export default function LoginPage() {
                 type="email"
                 placeholder="you@example.com"
                 required
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-foreground"
+              >
                 Password
               </label>
               <input
@@ -100,12 +122,19 @@ export default function LoginPage() {
                 type="password"
                 placeholder="••••••••"
                 required
-                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
-            {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
+            {!state.success && state.message && (
+              <p className="text-sm text-red-500 text-center">
+                {state.message}
+              </p>
+            )}
+            {state.errors && (
+              <div className="text-sm text-red-500 text-center">
+                {state.errors.email?.[0] || state.errors.password?.[0]}
+              </div>
             )}
 
             <Button
@@ -119,10 +148,10 @@ export default function LoginPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-gray-300" />
+              <span className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-gray-500">or</span>
+              <span className="bg-card px-2 text-muted-foreground">or</span>
             </div>
           </div>
 
@@ -134,10 +163,10 @@ export default function LoginPage() {
             Sign in with Google
           </Button>
 
-          <p className="text-center text-sm text-gray-500">
+          <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
-              href="/register"
+              href="/signup"
               className="text-emerald-500 hover:underline font-medium"
             >
               Sign up

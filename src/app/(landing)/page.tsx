@@ -38,12 +38,12 @@ export default function LandingPage() {
           knowledge, and grow together.
         </p>
         <div className="flex gap-4">
-          <Link href="/register?role=mentee">
+          <Link href="/signup?role=mentee">
             <Button size="lg" variant="outline">
               Find a Mentor
             </Button>
           </Link>
-          <Link href="/register?role=mentor">
+          <Link href="/signup?role=mentor">
             <Button size="lg" variant="secondary">
               Become a Mentor
             </Button>
