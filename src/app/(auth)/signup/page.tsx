@@ -8,10 +8,8 @@ import {
   CardTitle,
 } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
-import { useActionState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useActionState, useState } from "react";
 import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
 import { signUp, type ActionResponse } from "@/app/action/auth";
@@ -22,8 +20,33 @@ const initialState: ActionResponse = {
   errors: undefined,
 };
 
+type RoleOption = "MENTOR" | "MENTEE";
+
 export default function SignUpPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const roleParam = searchParams.get("role");
+  const initialRole: RoleOption =
+    roleParam?.toLowerCase() === "mentor"
+      ? "MENTOR"
+      : roleParam?.toLowerCase() === "mentee"
+        ? "MENTEE"
+        : "MENTEE";
+
+  // If user came from landing page with explicit role param, trust it
+  const hasRoleParam =
+    roleParam !== null &&
+    (roleParam.toLowerCase() === "mentor" ||
+      roleParam.toLowerCase() === "mentee");
+
+  const [selectedRole, setSelectedRole] = useState<RoleOption>(initialRole);
+  const [roleExplicitlySelected, setRoleExplicitlySelected] =
+    useState(hasRoleParam);
+
+  const handleRoleSelection = (role: RoleOption) => {
+    setSelectedRole(role);
+    setRoleExplicitlySelected(true);
+  };
 
   const handleSignUp = async (
     _prevState: ActionResponse,
@@ -64,21 +87,18 @@ export default function SignUpPage() {
   );
 
   const handleGoogleSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      console.log("logged in user:", user, {
-        name: user.displayName,
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL,
-      });
-      router.push("/dashboard");
-    } catch (err) {
-      console.error("Error signing in with Google:", err);
-      alert("Failed to sign in with Google. Please try again.");
+    if (!roleExplicitlySelected) {
+      alert(
+        "Please select your role (Mentor or Mentee) before continuing with Google.",
+      );
+      return;
     }
+
+    document.cookie = `pending_role=${selectedRole}; path=/; max-age=300`;
+    await nextAuthSignIn("google", {
+      callbackUrl: "/dashboard",
+      role: selectedRole.toLowerCase(),
+    });
   };
 
   return (
@@ -90,6 +110,54 @@ export default function SignUpPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <form action={formAction} className="space-y-4">
+            <input type="hidden" name="role" value={selectedRole} />
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">
+                I want to sign up as:
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  type="button"
+                  variant={selectedRole === "MENTEE" ? "secondary" : "outline"}
+                  onClick={() => handleRoleSelection("MENTEE")}
+                  className="w-full"
+                >
+                  Sign up as Mentee
+                </Button>
+                <Button
+                  type="button"
+                  variant={selectedRole === "MENTOR" ? "secondary" : "outline"}
+                  onClick={() => handleRoleSelection("MENTOR")}
+                  className="w-full"
+                >
+                  Sign up as Mentor
+                </Button>
+              </div>
+              {!roleExplicitlySelected && (
+                <p className="text-xs text-muted-foreground text-center">
+                  Please select your role to continue
+                </p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-foreground"
+              >
+                Full Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="John Doe"
+                required
+                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              />
+              {state.errors?.name && (
+                <p className="text-sm text-red-500">{state.errors.name[0]}</p>
+              )}
+            </div>
             <div className="space-y-2">
               <label
                 htmlFor="email"
@@ -160,8 +228,8 @@ export default function SignUpPage() {
 
             <Button
               type="submit"
-              disabled={isPending}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white"
+              disabled={isPending || !roleExplicitlySelected}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPending ? "Creating account..." : "Sign up"}
             </Button>
@@ -189,9 +257,15 @@ export default function SignUpPage() {
           <Button
             onClick={handleGoogleSignIn}
             variant="outline"
-            className="w-full"
+            className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!roleExplicitlySelected}
           >
             Continue with Google
+            {roleExplicitlySelected && selectedRole && (
+              <span className="">
+                (as {selectedRole === "MENTOR" ? "Mentor" : "Mentee"})
+              </span>
+            )}
           </Button>
         </CardContent>
       </Card>

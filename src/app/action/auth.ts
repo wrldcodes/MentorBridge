@@ -1,6 +1,7 @@
 "use server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { Role } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 
@@ -13,9 +14,13 @@ const SignInSchema = z.object({
 // Define Zod schema for signup validation
 const SignUpSchema = z
   .object({
+    name: z.string().min(1, "Name is required").max(100, "Name is too long"),
     email: z.string().min(1, "Email is required").email("Invalid email format"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string().min(1, "Please confirm your password"),
+    role: z.enum(["MENTOR", "MENTEE"], {
+      message: "Role is required",
+    }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -55,6 +60,10 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
     return { success: false, message: "USER_NOT_FOUND" };
   }
 
+  if (!user.password) {
+    return { success: false, message: "Please continue with Google" };
+  }
+
   const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) {
     return { success: false, message: "Invalid password" };
@@ -64,10 +73,17 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
 }
 
 export async function signUp(formData: FormData): Promise<ActionResponse> {
+  const rawRole = formData.get("role");
+  const normalizedRole =
+    typeof rawRole === "string" && rawRole.toUpperCase() === "MENTOR"
+      ? "MENTOR"
+      : "MENTEE";
   const data = {
+    name: formData.get("name") as string,
     email: formData.get("email") as string,
     password: formData.get("password") as string,
     confirmPassword: formData.get("confirmPassword") as string,
+    role: normalizedRole,
   };
 
   const validationResult = SignUpSchema.safeParse(data);
@@ -98,8 +114,10 @@ export async function signUp(formData: FormData): Promise<ActionResponse> {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user = await prisma.user.create({
       data: {
+        name: data.name,
         email: data.email,
         password: hashedPassword,
+        role: data.role as Role,
       },
     });
 

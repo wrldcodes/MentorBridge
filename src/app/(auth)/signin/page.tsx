@@ -8,9 +8,7 @@ import {
   CardTitle,
 } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
@@ -24,6 +22,7 @@ const initialState: ActionResponse = {
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleCredentialsSignIn = async (
     _prevState: ActionResponse,
@@ -67,21 +66,21 @@ export default function LoginPage() {
   );
 
   const handleGoogleSignIn = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+    const roleParam = searchParams.get("role");
+    const normalizedRole =
+      roleParam?.toLowerCase() === "mentor"
+        ? "MENTOR"
+        : roleParam?.toLowerCase() === "mentee"
+          ? "MENTEE"
+          : null;
 
-      console.log("logged in user:", user, {
-        name: user.displayName,
-        email: user.email,
-        uid: user.uid,
-        photoURL: user.photoURL,
-      });
-      router.push("/dashboard");
-    } catch (err) {
-      console.error("Error signing in with Google:", err);
-      alert("Failed to sign in with Google. Please try again.");
+    if (normalizedRole) {
+      document.cookie = `pending_role=${normalizedRole}; path=/; max-age=300`;
     }
+
+    await nextAuthSignIn("google", {
+      callbackUrl: "/dashboard",
+    });
   };
 
   return (
