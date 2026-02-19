@@ -1,72 +1,182 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   HomeIcon,
   CalendarIcon,
   MessageSquareIcon,
   SettingsIcon,
   LogOutIcon,
+  MenuIcon,
+  PanelLeftClose,
+  PanelLeft,
 } from "lucide-react";
-import NavLink from "./NavLink";
 import { signOut } from "next-auth/react";
-import ThemeToggle from "./ThemeToggle";
+import { cn } from "@/lib/utils";
+import { useNavigation } from "./NavigationContext";
 
 export default function MenteeNavigation() {
+  const pathname = usePathname();
+  const { isOpen, setIsOpen, mobileMenuOpen, setMobileMenuOpen } =
+    useNavigation();
+
+  const navItems = [
+    { href: "/dashboard/mentee", icon: HomeIcon, label: "Dashboard" },
+    { href: "/my-sessions", icon: CalendarIcon, label: "My Sessions" },
+    { href: "/my-requests", icon: MessageSquareIcon, label: "My Requests" },
+    { href: "/mentors", icon: CalendarIcon, label: "Find Mentors" },
+    { href: "/profile/edit", icon: SettingsIcon, label: "Settings" },
+  ];
+
   return (
-    <aside className="fixed inset-y-0 left-0 w-16 md:w-64 bg-black text-white dark:bg-white dark:text-black border-r border-gray-800 dark:border-gray-200 flex flex-col py-4 px-2 md:px-4">
-      <div className="flex items-center justify-center md:justify-start mb-8 px-2">
-        <Link
-          href="/dashboard/mentee"
-          className="text-white dark:text-black font-krona text-lg"
+    <>
+      {/* Mobile Dropdown Menu */}
+      {mobileMenuOpen && (
+        <>
+          <div
+            className="md:hidden fixed inset-0 bg-black/50 z-40"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="md:hidden fixed top-16 right-4 w-64 bg-background border border-border rounded-lg shadow-lg py-2 z-50">
+            <nav className="py-2">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "flex items-center px-4 py-3 text-sm font-medium hover:bg-accent transition-colors",
+                      isActive && "bg-accent",
+                    )}
+                  >
+                    <Icon size={20} className="mr-3" />
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="border-t border-border pt-2 px-4 pb-2">
+              <button
+                onClick={() => signOut()}
+                className="w-full flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-accent transition-colors"
+              >
+                <LogOutIcon size={20} className="mr-3" />
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Desktop Collapsible Sidebar */}
+      <aside
+        className={cn(
+          "hidden md:flex fixed inset-y-0 left-0 bg-black text-white dark:bg-white dark:text-black border-r border-gray-800 dark:border-gray-200 flex-col py-6 transition-all duration-300",
+          isOpen ? "w-64 px-4" : "w-20 px-3",
+        )}
+      >
+        {/* Navigation */}
+        <nav
+          className={cn(
+            "flex-1 flex flex-col",
+            isOpen ? "space-y-2" : "space-y-4 items-center",
+          )}
         >
-          <span className="md:hidden">MB</span>
-          <span className="hidden md:inline">MentorBridge</span>
-        </Link>
-      </div>
+          {/* Toggle Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={cn(
+              "flex items-center rounded-lg border border-transparent transition-colors mb-2",
+              "text-gray-400 dark:text-gray-500 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-100 dark:hover:text-black",
+              isOpen ? "px-3 py-2.5" : "p-3 justify-center",
+            )}
+            aria-label="Toggle sidebar"
+            title="Toggle sidebar"
+          >
+            {isOpen ? (
+              <>
+                <PanelLeftClose
+                  size={20}
+                  className="mr-3 text-gray-400 dark:text-gray-500"
+                />
+                <span className="text-sm font-medium">Collapse</span>
+              </>
+            ) : (
+              <PanelLeft size={28} strokeWidth={1.5} />
+            )}
+          </button>
 
-      <nav className="flex-1 flex flex-col space-y-2">
-        <NavLink
-          href="/dashboard/mentee"
-          icon={<HomeIcon size={20} />}
-          label="Dashboard"
-        />
-        <NavLink
-          href="/my-sessions"
-          icon={<CalendarIcon size={20} />}
-          label="My Sessions"
-        />
-        <NavLink
-          href="/my-requests"
-          icon={<MessageSquareIcon size={20} />}
-          label="My Requests"
-        />
-        <NavLink
-          href="/mentors"
-          icon={<CalendarIcon size={20} />}
-          label="Find Mentors"
-        />
-        <NavLink
-          href="/profile/edit"
-          icon={<SettingsIcon size={20} />}
-          label="Settings"
-        />
-      </nav>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
 
-      <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-        <div className="mb-2">
-          <ThemeToggle showLabel />
+            if (!isOpen) {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center justify-center p-3 rounded-lg border transition-colors group",
+                    isActive
+                      ? "bg-gray-800 border-gray-700 text-white dark:bg-gray-100 dark:border-gray-200 dark:text-black"
+                      : "border-transparent text-gray-400 dark:text-gray-500 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-100 dark:hover:text-black",
+                  )}
+                  title={item.label}
+                >
+                  <Icon size={28} strokeWidth={1.5} />
+                </Link>
+              );
+            }
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center px-3 py-2.5 text-sm font-medium rounded-lg border transition-colors",
+                  isActive
+                    ? "bg-gray-800 border-gray-700 text-white dark:bg-gray-100 dark:border-gray-200 dark:text-black"
+                    : "border-transparent text-gray-200 dark:text-gray-700 hover:bg-gray-800 dark:hover:bg-gray-100",
+                )}
+              >
+                <Icon
+                  size={20}
+                  className="mr-3 text-gray-400 dark:text-gray-500"
+                />
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Bottom Section */}
+        <div
+          className={cn(
+            "pt-4 border-t border-gray-800 dark:border-gray-200",
+            !isOpen && "flex flex-col items-center",
+          )}
+        >
+          <button
+            onClick={() => signOut()}
+            className={cn(
+              "w-full flex items-center rounded-lg text-gray-200 dark:text-gray-700 hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors",
+              isOpen ? "px-3 py-2.5" : "p-3 justify-center",
+            )}
+            title="Sign Out"
+          >
+            <LogOutIcon
+              size={isOpen ? 20 : 28}
+              strokeWidth={1.5}
+              className={isOpen ? "mr-3 text-gray-400 dark:text-gray-500" : ""}
+            />
+            {isOpen && <span className="text-sm font-medium">Sign Out</span>}
+          </button>
         </div>
-        <button
-          onClick={() => signOut()}
-          className="w-full flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-200 dark:text-gray-700 hover:bg-gray-800 dark:hover:bg-gray-100 group"
-        >
-          <span className="text-gray-400 dark:text-gray-500 mr-3">
-            <LogOutIcon size={20} />
-          </span>
-          <span className="hidden md:inline">Sign Out</span>
-        </button>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

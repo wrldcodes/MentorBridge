@@ -25,8 +25,8 @@ export default async function MentorDashboardPage() {
       </header>
 
       <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212] shadow-sm mt-8">
-        <div className="grid grid-cols-4 gap-3 px-2 py-6 bg-gray-50 dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-dark-border-subtle">
-          <Card className="h-full">
+        <div className="flex flex-wrap gap-3 px-2 py-6 bg-gray-50 dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-dark-border-subtle">
+          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
             <CardHeader>
               <CardTitle>Sessions Today</CardTitle>
               <CardDescription>
@@ -43,7 +43,7 @@ export default async function MentorDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="h-full">
+          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
             <CardHeader>
               <CardTitle>Pending Requests</CardTitle>
               <CardDescription>
@@ -60,7 +60,7 @@ export default async function MentorDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="h-full">
+          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
             <CardHeader>
               <CardTitle>Active Mentees</CardTitle>
               <CardDescription>
@@ -77,7 +77,7 @@ export default async function MentorDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="h-full">
+          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
             <CardHeader>
               <CardTitle>Total Sessions</CardTitle>
               <CardDescription>
@@ -94,7 +94,7 @@ export default async function MentorDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="col-span-4 h-full">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Upcoming Session</CardTitle>
               <CardAction>
@@ -112,8 +112,8 @@ export default async function MentorDashboardPage() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 px-8 py-6">
-          <Card className="h-full">
+        <div className="flex flex-wrap gap-4 px-8 py-6">
+          <Card className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">
             <CardHeader>
               <CardTitle>Weekly Progress</CardTitle>
               <CardDescription>Sessions completed this week</CardDescription>
@@ -123,7 +123,7 @@ export default async function MentorDashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="h-full">
+          <Card className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">
             <CardHeader>
               <CardTitle>Notifications</CardTitle>
               <CardDescription>Recent updates and reminders</CardDescription>

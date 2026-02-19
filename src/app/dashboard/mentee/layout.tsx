@@ -1,6 +1,13 @@
+"use client";
+
 import React from "react";
 import MenteeNavigation from "../../components/MenteeNavigation";
 import DashboardHeader from "@/app/components/DashboardHeader";
+import {
+  NavigationProvider,
+  useNavigation,
+} from "../../components/NavigationContext";
+import { cn } from "@/lib/utils";
 
 export default function MenteeLayout({
   children,
@@ -8,10 +15,25 @@ export default function MenteeLayout({
   children: React.ReactNode;
 }) {
   return (
+    <NavigationProvider>
+      <LayoutContent>{children}</LayoutContent>
+    </NavigationProvider>
+  );
+}
+
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { isOpen } = useNavigation();
+
+  return (
     <div className="min-h-screen">
-          <MenteeNavigation />
-          <DashboardHeader />
-      <main className="pl-16 md:pl-64 pt-0 min-h-screen">
+      <DashboardHeader />
+      <MenteeNavigation />
+      <main
+        className={cn(
+          "pt-16 min-h-screen transition-all duration-300",
+          isOpen ? "md:pl-64" : "md:pl-20",
+        )}
+      >
         <div className="max-w-6xl mx-auto p-4 md:p-8">{children}</div>
       </main>
     </div>

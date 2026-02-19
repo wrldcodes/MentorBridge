@@ -7,11 +7,13 @@ import React, { useEffect, useState } from "react";
 
 interface ThemeToggleProps {
   showLabel?: boolean;
+  showThemeName?: boolean;
   className?: string;
 }
 
 export default function ThemeToggle({
   showLabel = false,
+  showThemeName = false,
   className,
 }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -38,9 +40,12 @@ export default function ThemeToggle({
         {showLabel && (
           <span className="ml-3 hidden md:inline opacity-0">Theme</span>
         )}
+        {showThemeName && <span className="ml-2 opacity-0">Light</span>}
       </button>
     );
   }
+
+  const themeName = isDark ? "Dark" : "Light";
 
   return (
     <button
@@ -51,6 +56,7 @@ export default function ThemeToggle({
     >
       {isDark ? <SunIcon size={18} /> : <MoonIcon size={18} />}
       {showLabel && <span className="ml-3 hidden md:inline">Theme</span>}
+      {showThemeName && <span className="ml-2 text-sm">{themeName}</span>}
     </button>
   );
 }

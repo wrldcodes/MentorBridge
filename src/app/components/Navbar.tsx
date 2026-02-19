@@ -4,7 +4,8 @@ import { Button } from "./ui/button";
 import ThemeToggle from "./ThemeToggle";
 const Navbar = () => {
   return (
-    <header className="border rounded-3xl p-1 m-3 bg-black text-white dark:bg-white dark:text-black shadow-sm">
+    <header className="position sticky top-0 z-50  border-b bg-background/80 backdrop-blur-sm dark:border-gray-700/50
+    border rounded-3xl p-1 m-3 text-white dark:bg-white dark:text-black shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link href="/" className="text-white dark:text-black font-krona">
           MentorBridge
