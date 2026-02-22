@@ -77,7 +77,7 @@ export default function SignUpPage() {
       };
     }
 
-    router.push("/dashboard");
+    router.push("/profile/edit");
     return { success: true, message: "Account created successfully" };
   };
 
@@ -96,7 +96,7 @@ export default function SignUpPage() {
 
     document.cookie = `pending_role=${selectedRole}; path=/; max-age=300`;
     await nextAuthSignIn("google", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/api/auth/check-profile",
       role: selectedRole.toLowerCase(),
     });
   };

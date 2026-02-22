@@ -12,7 +12,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
-import { signIn, ActionResponse } from "@/app/action/auth";
+import { signIn, ActionResponse, getPostAuthRedirect } from "@/app/action/auth";
 
 const initialState: ActionResponse = {
   success: false,
@@ -56,7 +56,8 @@ export default function LoginPage() {
       };
     }
 
-    router.push("/dashboard");
+    const redirectPath = await getPostAuthRedirect();
+    router.push(redirectPath);
     return { success: true, message: "Authenticated" };
   };
 
@@ -79,7 +80,7 @@ export default function LoginPage() {
     }
 
     await nextAuthSignIn("google", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/api/auth/check-profile",
     });
   };
 

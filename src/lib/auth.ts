@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth-options";
 import { prisma } from "./prisma";
 import { cookies } from "next/headers";
 import { cache } from "react";
@@ -29,7 +29,7 @@ export const getCurrentUser = cache(async () => {
   });
 
   return user;
-})
+});
 
 // Delete session by clearing the JWT cookie
 export async function deleteSession() {

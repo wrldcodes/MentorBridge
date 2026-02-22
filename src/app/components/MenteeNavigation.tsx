@@ -22,9 +22,13 @@ export default function MenteeNavigation() {
     useNavigation();
 
   const navItems = [
-    { href: "/dashboard/mentee", icon: HomeIcon, label: "Dashboard" },
+    { href: "/home", icon: HomeIcon, label: "Home" },
     { href: "/my-sessions", icon: CalendarIcon, label: "My Sessions" },
-    { href: "/my-requests", icon: MessageSquareIcon, label: "My Requests" },
+    {
+      href: "/my-requests",
+      icon: MessageSquareIcon,
+      label: "My Requests",
+    },
     { href: "/mentors", icon: CalendarIcon, label: "Find Mentors" },
     { href: "/profile/edit", icon: SettingsIcon, label: "Settings" },
   ];

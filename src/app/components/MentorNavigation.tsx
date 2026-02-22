@@ -23,10 +23,10 @@ export default function MentorNavigation() {
     useNavigation();
 
   const navItems = [
-    { href: "/dashboard/mentor", icon: HomeIcon, label: "Home" },
-    { href: "/my-sessions", icon: UsersIcon, label: "My Mentees" },
+    { href: "/home", icon: HomeIcon, label: "Home" },
+    { href: "/sessions", icon: UsersIcon, label: "My Mentees" },
     { href: "/requests", icon: CheckSquareIcon, label: "Requests" },
-    { href: "/sessions", icon: BarChartIcon, label: "Sessions" },
+    { href: "/availability", icon: BarChartIcon, label: "Availability" },
     { href: "/profile/edit", icon: SettingsIcon, label: "Settings" },
   ];
 

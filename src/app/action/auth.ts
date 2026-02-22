@@ -4,11 +4,22 @@ import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 // Define Zod schema for signin validation
 const SignInSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email format"),
   password: z.string().min(1, "Password is required"),
+});
+
+const EditProfileSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name is too long")
+    .optional(),
+  bio: z.string().max(500, "Bio is too long").optional(),
+  skills: z.array(z.string()).optional(),
 });
 
 // Define Zod schema for signup validation
@@ -29,7 +40,7 @@ const SignUpSchema = z
 
 export type SignInData = z.infer<typeof SignInSchema>;
 export type SignUpData = z.infer<typeof SignUpSchema>;
-
+export type EditProfileData = z.infer<typeof EditProfileSchema>;
 export type ActionResponse = {
   success: boolean;
   message: string;
@@ -143,6 +154,71 @@ export async function signUp(formData: FormData): Promise<ActionResponse> {
   }
 }
 
+export async function updateProfile(
+  userId: string,
+  _prevState: ActionResponse,
+  formData: FormData,
+): Promise<ActionResponse> {
+  const data = {
+    name: (formData.get("name") as string) || undefined,
+    bio: (formData.get("bio") as string) || undefined,
+    skills: formData.getAll("skills") as string[],
+  };
+
+  const validationResult = EditProfileSchema.safeParse(data);
+  if (!validationResult.success) {
+    return {
+      success: false,
+      message: "Validation failed",
+      errors: validationResult.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name: validationResult.data.name,
+        bio: validationResult.data.bio,
+        skills: validationResult.data.skills ?? [],
+      },
+    });
+
+    revalidatePath("/mentor/profile");
+    revalidatePath("/mentee/profile");
+    return { success: true, message: "Profile updated successfully" };
+  } catch (error) {
+    console.error("Update profile error:", error);
+    return {
+      success: false,
+      message: "Failed to update profile",
+      error: "Failed to update profile",
+    };
+  }
+}
+
 export async function signOut(): Promise<void> {
   redirect("/signin");
+}
+
+export async function getPostAuthRedirect(): Promise<string> {
+  const { getSession } = await import("@/lib/auth");
+  const session = await getSession();
+  if (!session?.user?.id) return "/signin";
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { name: true, skills: true, role: true },
+  });
+
+  if (!user) return "/signin";
+
+  const isComplete = !!(user.name && user.skills.length > 0);
+  const role = user.role?.toLowerCase();
+
+  if (!isComplete) {
+    return role === "mentor" ? "/mentor/profile/edit" : "/mentee/profile/edit";
+  }
+
+  return "/home";
 }

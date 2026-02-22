@@ -29,7 +29,7 @@ export default function DashboardHeader() {
       )}
     >
       <div className="flex items-center gap-4">
-        <Link href="/dashboard/mentor" className="font-krona text-lg">
+        <Link href="/home" className="font-krona text-lg">
           MentorBridge
         </Link>
       </div>

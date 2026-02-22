@@ -180,10 +180,10 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
     if (!api) return;
 
     setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedIndex);
+    setCurrent(api.selectedScrollSnap());
 
     const onSelect = () => {
-      setCurrent(api.selectedIndex);
+      setCurrent(api.selectedScrollSnap());
     };
 
     api.on("select", onSelect);

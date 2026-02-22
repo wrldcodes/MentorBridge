@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
@@ -32,7 +33,8 @@ vi.mock("@/app/action/auth", () => ({
 const nextAuthSignInMock = vi.mocked(nextAuthSignIn);
 
 describe("SignUpPage", () => {
-  let actionStateSpy: vi.SpiedFunction<(typeof React)["useActionState"]>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let actionStateSpy: any;
 
   beforeEach(() => {
     mockRoleParam = null;
