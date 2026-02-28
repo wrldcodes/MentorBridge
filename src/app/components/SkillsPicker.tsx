@@ -55,7 +55,7 @@ export default function SkillsPicker({
         placeholder="Search skills..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full rounded-md border border-gray-200 dark:border-white/10 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        className="form-input"
       />
 
       {/* Selected count */}
@@ -69,9 +69,7 @@ export default function SkillsPicker({
       <div className="space-y-4 max-h-80 overflow-y-auto pr-1">
         {Object.entries(filteredCategories).map(([category, skills]) => (
           <div key={category}>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-              {category}
-            </p>
+            <p className="field-label font-semibold mb-2">{category}</p>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => {
                 const isSelected = selected.has(skill.id);
@@ -96,7 +94,7 @@ export default function SkillsPicker({
         ))}
 
         {Object.keys(filteredCategories).length === 0 && (
-          <p className="text-sm text-muted-foreground text-center py-4">
+          <p className="text-secondary text-center py-4">
             No skills match &quot;{search}&quot;
           </p>
         )}

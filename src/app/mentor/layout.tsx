@@ -30,7 +30,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <MentorNavigation />
       <main
         className={cn(
-          "pt-16 min-h-screen transition-all duration-300",
+          "pt-16 min-h-screen anim-layout",
           isOpen ? "md:pl-64" : "md:pl-20",
         )}
       >

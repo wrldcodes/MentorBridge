@@ -23,7 +23,7 @@ export default function DashboardHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 right-0 bg-background border-b border-border h-16 flex items-center justify-between px-4 md:px-8 z-40 transition-all duration-300",
+        "fixed top-0 right-0 bg-background border-b border-border h-16 row-between px-4 md:px-8 z-40 anim-layout",
         isOpen ? "md:left-64" : "md:left-20",
         "left-0",
       )}
@@ -48,7 +48,7 @@ export default function DashboardHeader() {
         {/* Mobile Hamburger Menu */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 hover:bg-accent rounded-md transition-colors"
+          className="md:hidden p-2 rounded-md interactive"
           aria-label="Toggle menu"
         >
           <Menu size={24} />
@@ -56,16 +56,16 @@ export default function DashboardHeader() {
 
         {/* User profile - Desktop Only */}
         <div className="hidden md:flex relative border-l-2 border-border items-center gap-3 pl-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex-center text-white font-semibold text-sm">
             {user?.name?.[0]?.toUpperCase() || "U"}
           </div>
           <div className="hidden md:flex flex-col">
-            <UserName className="text-sm font-medium text-foreground" />
+            <UserName className="text-label text-foreground" />
             <UserEmail className="text-xs text-muted-foreground" />
           </div>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="p-1 hover:bg-accent rounded-md transition-colors"
+            className="p-1 rounded-md interactive"
           >
             <ChevronDown size={18} className="text-muted-foreground" />
           </button>
@@ -75,14 +75,14 @@ export default function DashboardHeader() {
             <div className="absolute top-full right-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg py-1">
               <Link
                 href="/profile"
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-foreground interactive"
               >
                 <User size={16} />
                 My Profile
               </Link>
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-foreground interactive"
               >
                 <LogOut size={16} />
                 Sign Out

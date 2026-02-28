@@ -24,9 +24,9 @@ export default async function MenteeDashboardPage() {
         </h1>
       </header>
 
-      <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212] shadow-sm mt-8">
+      <div className="panel mt-8">
         <div className="flex flex-wrap gap-3 px-2 py-6 bg-gray-50 dark:bg-[#1a1a1a] border-b border-gray-200 dark:border-dark-border-subtle">
-          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
+          <Card className="stat-card">
             <CardHeader>
               <CardTitle>Sessions Today</CardTitle>
               <CardDescription>
@@ -34,7 +34,7 @@ export default async function MenteeDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-semibold">0</p>
+              <p className="stat-value">0</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -43,13 +43,13 @@ export default async function MenteeDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
+          <Card className="stat-card">
             <CardHeader>
               <CardTitle>Active Mentors</CardTitle>
               <CardDescription>Mentors currently guiding you</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-semibold">0</p>
+              <p className="stat-value">0</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -58,7 +58,7 @@ export default async function MenteeDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
+          <Card className="stat-card">
             <CardHeader>
               <CardTitle>Pending Requests</CardTitle>
               <CardDescription>
@@ -66,7 +66,7 @@ export default async function MenteeDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-semibold">0</p>
+              <p className="stat-value">0</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -75,13 +75,13 @@ export default async function MenteeDashboardPage() {
             </CardFooter>
           </Card>
 
-          <Card className="flex-1 min-w-full sm:min-w-[calc(50%-0.375rem)] lg:min-w-[calc(25%-0.75rem)]">
+          <Card className="stat-card">
             <CardHeader>
               <CardTitle>Available Mentors</CardTitle>
               <CardDescription>Browse and connect with mentors</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-3xl font-semibold">24+</p>
+              <p className="stat-value">24+</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -101,7 +101,7 @@ export default async function MenteeDashboardPage() {
               <CardDescription>Your next mentoring session</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-secondary">
                 No upcoming session scheduled yet. Browse mentors to get
                 started!
               </p>
@@ -110,25 +110,23 @@ export default async function MenteeDashboardPage() {
         </div>
 
         <div className="flex flex-wrap gap-4 px-8 py-6">
-          <Card className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">
+          <Card className="half-card">
             <CardHeader>
               <CardTitle>Weekly Progress</CardTitle>
               <CardDescription>Sessions attended this week</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">No data yet.</p>
+              <p className="text-secondary">No data yet.</p>
             </CardContent>
           </Card>
 
-          <Card className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">
+          <Card className="half-card">
             <CardHeader>
               <CardTitle>Notifications</CardTitle>
               <CardDescription>Recent updates and reminders</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                You are all caught up.
-              </p>
+              <p className="text-secondary">You are all caught up.</p>
             </CardContent>
           </Card>
         </div>

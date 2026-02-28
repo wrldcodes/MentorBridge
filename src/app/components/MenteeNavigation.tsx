@@ -11,6 +11,7 @@ import {
   MenuIcon,
   PanelLeftClose,
   PanelLeft,
+  UserIcon,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
@@ -30,6 +31,7 @@ export default function MenteeNavigation() {
       label: "My Requests",
     },
     { href: "/mentors", icon: CalendarIcon, label: "Find Mentors" },
+    { href: "/profile", icon: UserIcon, label: "My Account" },
     { href: "/profile/edit", icon: SettingsIcon, label: "Settings" },
   ];
 
@@ -53,7 +55,7 @@ export default function MenteeNavigation() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center px-4 py-3 text-sm font-medium hover:bg-accent transition-colors",
+                      "flex items-center px-4 py-3 text-label interactive",
                       isActive && "bg-accent",
                     )}
                   >
@@ -66,7 +68,7 @@ export default function MenteeNavigation() {
             <div className="border-t border-border pt-2 px-4 pb-2">
               <button
                 onClick={() => signOut()}
-                className="w-full flex items-center px-2 py-2 text-sm font-medium rounded-md hover:bg-accent transition-colors"
+                className="w-full flex items-center px-2 py-2 text-label rounded-md interactive"
               >
                 <LogOutIcon size={20} className="mr-3" />
                 Sign Out
@@ -79,7 +81,7 @@ export default function MenteeNavigation() {
       {/* Desktop Collapsible Sidebar */}
       <aside
         className={cn(
-          "hidden md:flex fixed inset-y-0 left-0 bg-black text-white dark:bg-white dark:text-black border-r border-gray-800 dark:border-gray-200 flex-col py-6 transition-all duration-300",
+          "hidden md:flex fixed inset-y-0 left-0 surface-inverted border-r border-gray-800 dark:border-gray-200 flex-col py-6 anim-layout",
           isOpen ? "w-64 px-4" : "w-20 px-3",
         )}
       >
@@ -141,7 +143,7 @@ export default function MenteeNavigation() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center px-3 py-2.5 text-sm font-medium rounded-lg border transition-colors",
+                  "nav-link-expanded",
                   isActive
                     ? "bg-gray-800 border-gray-700 text-white dark:bg-gray-100 dark:border-gray-200 dark:text-black"
                     : "border-transparent text-gray-200 dark:text-gray-700 hover:bg-gray-800 dark:hover:bg-gray-100",

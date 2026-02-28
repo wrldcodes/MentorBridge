@@ -201,8 +201,6 @@ export async function signOut(): Promise<void> {
   redirect("/signin");
 }
 
-
-
 export async function getPostAuthRedirect(): Promise<string> {
   const { getSession } = await import("@/lib/auth");
   const session = await getSession();

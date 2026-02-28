@@ -45,8 +45,8 @@ export default function EditProfileForm({
   return (
     <form action={formAction} className="space-y-6">
       {/* Name */}
-      <div className="space-y-1.5">
-        <label htmlFor="name" className="text-sm font-medium">
+      <div className="form-field">
+        <label htmlFor="name" className="text-label">
           Name
         </label>
         <input
@@ -55,7 +55,7 @@ export default function EditProfileForm({
           type="text"
           defaultValue={defaultName}
           placeholder="Your full name"
-          className="w-full rounded-md border border-gray-200 dark:border-white/10 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="form-input"
         />
         {state.errors?.name && (
           <p className="text-xs text-destructive">{state.errors.name[0]}</p>
@@ -63,8 +63,8 @@ export default function EditProfileForm({
       </div>
 
       {/* Bio */}
-      <div className="space-y-1.5">
-        <label htmlFor="bio" className="text-sm font-medium">
+      <div className="form-field">
+        <label htmlFor="bio" className="text-label">
           Bio
           <span className="text-muted-foreground font-normal ml-1">
             (optional)
@@ -76,7 +76,7 @@ export default function EditProfileForm({
           rows={4}
           defaultValue={defaultBio}
           placeholder="Tell mentors or mentees a bit about yourself..."
-          className="w-full rounded-md border border-gray-200 dark:border-white/10 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+          className="form-input resize-none"
         />
         {state.errors?.bio && (
           <p className="text-xs text-destructive">{state.errors.bio[0]}</p>
@@ -84,8 +84,8 @@ export default function EditProfileForm({
       </div>
 
       {/* Skills */}
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium">
+      <div className="form-field">
+        <label className="text-label">
           Skills
           <span className="text-muted-foreground font-normal ml-1">
             (select all that apply)
@@ -121,14 +121,14 @@ export default function EditProfileForm({
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center justify-center rounded-md bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium px-5 py-2 transition-colors disabled:opacity-50 disabled:pointer-events-none"
+          className="btn-base bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium px-5 py-2 transition-colors disabled:opacity-50 disabled:pointer-events-none"
         >
           {isPending ? "Saving..." : "Save Changes"}
         </button>
         <button
           type="button"
           onClick={() => router.push(cancelPath)}
-          className="inline-flex items-center justify-center rounded-md border border-gray-200 dark:border-white/10 bg-background text-sm font-medium px-5 py-2 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+          className="btn-base border border-gray-200 dark:border-white/10 bg-background text-sm font-medium px-5 py-2 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
         >
           Cancel
         </button>

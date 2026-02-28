@@ -29,35 +29,31 @@ export default function ProfileView({ user, editHref }: ProfileViewProps) {
       </header>
 
       {/* Avatar & identity */}
-      <div className="flex items-center gap-6 p-6 rounded-lg border border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212] shadow-sm">
+      <div className="card-panel flex items-center gap-6">
         <div className="relative h-20 w-20 shrink-0">
           <Image
             src={user.image ?? "/default-profile-image.png"}
             alt={user.name ?? "Profile"}
             fill
-            className="rounded-full object-cover"
+            className="avatar-img"
           />
         </div>
         <div className="flex-1 min-w-0">
           <h2 className="text-xl font-semibold truncate">{user.name ?? ""}</h2>
-          <p className="text-sm text-muted-foreground capitalize">
-            {user.role.toLowerCase()}
-          </p>
+          <p className="text-secondary capitalize">{user.role.toLowerCase()}</p>
           {user.bio && (
-            <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-              {user.bio}
-            </p>
+            <p className="text-secondary mt-1 line-clamp-2">{user.bio}</p>
           )}
         </div>
       </div>
 
       {/* Personal information */}
-      <div className="p-6 rounded-lg border border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-[#121212] shadow-sm space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="card-panel space-y-4">
+        <div className="row-between">
           <h2 className="text-lg font-semibold">Personal Information</h2>
           <Link
             href={editHref}
-            className="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-md border border-gray-200 dark:border-dark-border-subtle hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+            className="btn-base gap-1.5 text-label px-3 py-1.5 border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,33 +74,23 @@ export default function ProfileView({ user, editHref }: ProfileViewProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
           <div>
-            <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-              Name
-            </p>
-            <p className="text-sm font-medium">{user.name ?? ""}</p>
+            <p className="field-label mb-1">Name</p>
+            <p className="text-label">{user.name ?? ""}</p>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-              Email
-            </p>
-            <p className="text-sm font-medium">{user.email}</p>
+            <p className="field-label mb-1">Email</p>
+            <p className="text-label">{user.email}</p>
           </div>
           <div>
-            <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-              Role
-            </p>
-            <p className="text-sm font-medium capitalize">
-              {user.role.toLowerCase()}
-            </p>
+            <p className="field-label mb-1">Role</p>
+            <p className="text-label capitalize">{user.role.toLowerCase()}</p>
           </div>
         </div>
 
         {skillLabels.length > 0 && (
           <div>
-            <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2">
-              Skills
-            </p>
-            <div className="flex flex-wrap gap-3">
+            <p className="field-label mb-2">Skills</p>
+            <div className="chip-row">
               {skillLabels.map((label) => (
                 <span
                   key={label}
