@@ -1,7 +1,12 @@
-export default function MenteeMySessionsPage() {
+import { MenteeSessionsView } from "@/components/MenteeSessionsView";
+import { getMenteeMySessionsPageData } from "@/hooks/useMenteeMySessionsPageData";
+
+export default async function MenteeMySessionsPage() {
+  const { sessions, matchedMentors } = await getMenteeMySessionsPageData();
+
   return (
     <div className="p-4 md:p-8">
-      <h1 className="text-2xl font-semibold">My Sessions</h1>
+      <MenteeSessionsView sessions={sessions} matchedMentors={matchedMentors} />
     </div>
   );
 }

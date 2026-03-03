@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import MentorNavigation from "../components/MentorNavigation";
-import DashboardHeader from "../components/DashboardHeader";
+import MentorNavigation from "@/components/MentorNavigation";
+import DashboardHeader from "@/components/DashboardHeader";
 import {
   NavigationProvider,
   useNavigation,
-} from "../components/NavigationContext";
+} from "@/components/NavigationContext";
 import { cn } from "@/lib/utils";
 
 export default function MentorLayout({

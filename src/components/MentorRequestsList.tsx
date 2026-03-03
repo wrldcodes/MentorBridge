@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
 import {
   Card,
   CardContent,
@@ -10,80 +9,20 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { RequestStatus } from "@prisma/client";
-
-type RequestItem = {
-  id: string;
-  topic: string;
-  message: string | null;
-  status: RequestStatus;
-  createdAt: string | Date;
-  mentee: {
-    id: string;
-    name: string | null;
-    bio: string | null;
-    skills: string[];
-    image: string | null;
-  };
-};
+import {
+  MentorRequestItem,
+  useMentorRequestsList,
+} from "@/hooks/useMentorRequestsList";
 
 type MentorRequestsListProps = {
-  initialRequests: RequestItem[];
+  initialRequests: MentorRequestItem[];
 };
 
 export function MentorRequestsList({
   initialRequests,
 }: MentorRequestsListProps) {
-  const [requests, setRequests] = useState<RequestItem[]>(initialRequests);
-  const [query, setQuery] = useState("");
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
-
-  const filteredRequests = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return requests;
-
-    return requests.filter((request) => {
-      const name = request.mentee.name?.toLowerCase() ?? "";
-      const bio = request.mentee.bio?.toLowerCase() ?? "";
-      const skillsText = request.mentee.skills.join(" ").toLowerCase();
-      const topic = request.topic.toLowerCase();
-
-      return (
-        name.includes(q) ||
-        bio.includes(q) ||
-        skillsText.includes(q) ||
-        topic.includes(q)
-      );
-    });
-  }, [requests, query]);
-
-  const handleAction = (id: string, status: "ACCEPTED" | "REJECTED") => {
-    setError(null);
-
-    startTransition(async () => {
-      try {
-        const response = await fetch(`/api/requests/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status }),
-        });
-
-        if (!response.ok) {
-          const data = await response.json().catch(() => ({}));
-          throw new Error(data.error || "Failed to update request");
-        }
-
-        setRequests((prev) => prev.filter((request) => request.id !== id));
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Something went wrong",
-        );
-      }
-    });
-  };
+  const { query, setQuery, error, isPending, filteredRequests, handleAction } =
+    useMentorRequestsList(initialRequests);
 
   return (
     <div className="flex flex-col gap-6">
@@ -182,4 +121,3 @@ export function MentorRequestsList({
     </div>
   );
 }
-

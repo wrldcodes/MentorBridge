@@ -1,4 +1,4 @@
-import { CurrentDate, TimeGreeting } from "@/app/components/Timestamp";
+import { CurrentDate, TimeGreeting } from "@/components/Timestamp";
 import {
   Card,
   CardAction,
@@ -7,13 +7,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
-import { getCurrentUser } from "@/lib/auth";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { getAuthenticatedUser } from "@/hooks/useAuthenticatedUser";
 import Link from "next/link";
 
 export default async function MentorDashboardPage() {
-  const user = await getCurrentUser();
+  const user = await getAuthenticatedUser();
 
   return (
     <div className="p-1">

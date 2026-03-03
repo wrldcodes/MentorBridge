@@ -1,10 +1,8 @@
-import { getCurrentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import ProfileView from "@/app/components/ProfileView";
+import ProfileView from "@/components/ProfileView";
+import { getAuthenticatedUser } from "@/hooks/useAuthenticatedUser";
 
 export default async function MentorProfilePage() {
-  const user = await getCurrentUser();
-  if (!user) redirect("/signin");
+  const user = await getAuthenticatedUser();
 
   return <ProfileView user={user} editHref="/mentor/profile/edit" />;
 }

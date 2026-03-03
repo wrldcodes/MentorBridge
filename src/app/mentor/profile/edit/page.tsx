@@ -1,12 +1,10 @@
-import { getCurrentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import EditProfileForm from "@/app/components/EditProfileForm";
+import EditProfileForm from "@/components/EditProfileForm";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { getAuthenticatedUser } from "@/hooks/useAuthenticatedUser";
 
 export default async function MentorProfileEditPage() {
-  const user = await getCurrentUser();
-  if (!user) redirect("/signin");
+  const user = await getAuthenticatedUser();
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">

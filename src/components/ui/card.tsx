@@ -1,7 +1,37 @@
+"use client";
 import * as React from "react";
 import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
+
+gsap.registerPlugin(Flip);
+
+export default function CardStack({ children }: { children: React.ReactNode }) {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const cards = containerRef.current.querySelectorAll(".card");
+
+    // Example: stack cards
+    const state = Flip.getState(cards);
+    containerRef.current.classList.toggle("stacked");
+    Flip.from(state, {
+      duration: 0.7,
+      ease: "power1.inOut",
+      stagger: 0.05,
+    });
+  }, []);
+
+  return (
+    <div ref={containerRef} className="card-container">
+    {children}
+    </div>
+  );
+}
 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (

@@ -16,6 +16,7 @@ const MENTEE_REWRITES: Record<string, string> = {
   "/home": "/mentee/home",
   "/my-sessions": "/mentee/my-sessions",
   "/my-requests": "/mentee/my-requests",
+  "/mentors": "/mentee/mentors",
   "/profile": "/mentee/profile",
   "/profile/edit": "/mentee/profile/edit",
 };
@@ -75,6 +76,7 @@ export const config = {
     "/availability",
     "/my-sessions",
     "/my-requests",
+    "/mentors",
     "/profile",
     "/profile/edit",
   ],

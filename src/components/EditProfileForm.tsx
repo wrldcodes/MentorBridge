@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import SkillsPicker from "@/app/components/SkillsPicker";
+import SkillsPicker from "@/components/SkillsPicker";
 import { updateProfile, type ActionResponse } from "@/app/action/auth";
 import { SKILLS } from "@/utils/constants";
 

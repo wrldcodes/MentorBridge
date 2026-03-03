@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import { RequestMentorshipButton } from "./RequestMentorshipButton";
 import {
   Card,
@@ -11,17 +10,10 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
-
-type Mentor = {
-  id: string;
-  name: string | null;
-  image: string | null;
-  bio: string | null;
-  skills: string[];
-};
+import { MentorBrowserItem, useMentorBrowser } from "@/hooks/useMentorBrowser";
 
 type MentorBrowserProps = {
-  mentors: Mentor[];
+  mentors: MentorBrowserItem[];
   pendingMentorIds: string[];
 };
 
@@ -29,35 +21,8 @@ export function MentorBrowser({
   mentors,
   pendingMentorIds,
 }: MentorBrowserProps) {
-  const [query, setQuery] = useState("");
-
-  const pendingSet = useMemo(
-    () => new Set(pendingMentorIds),
-    [pendingMentorIds],
-  );
-
-  const filteredMentors = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return mentors;
-
-    return mentors.filter((mentor) => {
-      const name = mentor.name?.toLowerCase() ?? "";
-      const bio = mentor.bio?.toLowerCase() ?? "";
-      const skillsText = mentor.skills.join(" ").toLowerCase();
-
-      return (
-        name.includes(q) || bio.includes(q) || skillsText.includes(q)
-      );
-    });
-  }, [mentors, query]);
-
-  const uniqueSkills = useMemo(() => {
-    const set = new Set<string>();
-    mentors.forEach((mentor) => {
-      mentor.skills.forEach((skill) => set.add(skill));
-    });
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
-  }, [mentors]);
+  const { query, setQuery, pendingSet, filteredMentors, uniqueSkills } =
+    useMentorBrowser(mentors, pendingMentorIds);
 
   return (
     <div className="flex flex-col gap-6">
@@ -150,4 +115,3 @@ export function MentorBrowser({
     </div>
   );
 }
-

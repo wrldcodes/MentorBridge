@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Calendar } from "@/app/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 
 type MentorScheduleCalendarProps = {
   scheduledDates: string[];

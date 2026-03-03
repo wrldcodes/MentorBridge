@@ -1,10 +1,9 @@
-import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
-import { MentorBrowser } from "@/app/components/MentorBrowser";
+import { prisma } from "@/lib/prisma";
 import { RequestStatus, Role } from "@prisma/client";
+import { redirect } from "next/navigation";
 
-export default async function MentorsPage() {
+export async function getMentorsPageData() {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -42,12 +41,8 @@ export default async function MentorsPage() {
     }),
   ]);
 
-  const pendingMentorIds = pendingRequests.map((request) => request.mentorId);
-
-  return (
-    <div className="p-4 md:p-6">
-      <MentorBrowser mentors={mentors} pendingMentorIds={pendingMentorIds} />
-    </div>
-  );
+  return {
+    mentors,
+    pendingMentorIds: pendingRequests.map((request) => request.mentorId),
+  };
 }
-

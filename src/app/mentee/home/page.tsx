@@ -1,5 +1,4 @@
-import { getCurrentUser } from "@/lib/auth";
-import { CurrentDate, TimeGreeting } from "@/app/components/Timestamp";
+import { CurrentDate, TimeGreeting } from "@/components/Timestamp";
 import {
   Card,
   CardAction,
@@ -8,12 +7,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getAuthenticatedUser } from "@/hooks/useAuthenticatedUser";
 
 export default async function MenteeDashboardPage() {
-  const user = await getCurrentUser();
+  const user = await getAuthenticatedUser();
 
   return (
     <div className="p-1">

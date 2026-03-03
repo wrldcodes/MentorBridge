@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Timestamp } from "@/app/components/Timestamp";
-import { Button } from "@/app/components/ui/button";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Timestamp } from "@/components/Timestamp";
+import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const dynamic = "force-dynamic";
 
