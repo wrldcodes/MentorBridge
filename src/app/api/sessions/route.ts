@@ -23,9 +23,7 @@ export async function GET() {
 
   const sessions = await prisma.mentorSession.findMany({
     where:
-      user.role === Role.MENTOR
-        ? { mentorId: user.id }
-        : { menteeId: user.id },
+      user.role === Role.MENTOR ? { mentorId: user.id } : { menteeId: user.id },
     include: {
       mentor: { select: { id: true, name: true, image: true } },
       mentee: { select: { id: true, name: true, image: true } },
@@ -84,7 +82,9 @@ export async function POST(req: NextRequest) {
   }
 
   const start = new Date(startTime);
-  const end = endTime ? new Date(endTime) : new Date(start.getTime() + 60 * 60 * 1000);
+  const end = endTime
+    ? new Date(endTime)
+    : new Date(start.getTime() + 60 * 60 * 1000);
 
   if (isNaN(start.getTime()) || start <= new Date()) {
     return NextResponse.json(
@@ -99,10 +99,7 @@ export async function POST(req: NextRequest) {
   });
 
   if (!mentor || mentor.role !== Role.MENTOR) {
-    return NextResponse.json(
-      { error: "Mentor not found" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "Mentor not found" }, { status: 400 });
   }
 
   const sessionRecord = await prisma.mentorSession.create({

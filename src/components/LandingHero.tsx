@@ -60,11 +60,11 @@ const LandingHero = () => {
               effective.
             </h2>
             <p className="text-muted-foreground mb-6">
-              That&apos;s why MentorBridge connects mentees with experienced mentors
-              for personalized guidance and support. Whether you&apos;re looking to
-              develop new skills, navigate career transitions, or achieve
-              specific goals, our platform makes it easy to find the right
-              mentor for your needs.
+              That&apos;s why MentorBridge connects mentees with experienced
+              mentors for personalized guidance and support. Whether you&apos;re
+              looking to develop new skills, navigate career transitions, or
+              achieve specific goals, our platform makes it easy to find the
+              right mentor for your needs.
             </p>
             <Button className="rounded-full" size="lg" variant="secondary">
               Learn More
@@ -349,8 +349,8 @@ const LandingHero = () => {
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground">
                       Being a mentor on MentorBridge has been an incredible
-                      experience. I&apos;ve been able to share my knowledge and help
-                      others grow in their careers.
+                      experience. I&apos;ve been able to share my knowledge and
+                      help others grow in their careers.
                     </p>
                     <p className="text-muted-foreground">
                       The platform makes it easy to connect with mentees and
@@ -390,8 +390,8 @@ const LandingHero = () => {
                     </p>
                     <p className="text-muted-foreground">
                       Transitioning to a new career felt daunting, but with my
-                      mentor&apos;s help, I gained confidence and clarity. Highly
-                      recommend!
+                      mentor&apos;s help, I gained confidence and clarity.
+                      Highly recommend!
                     </p>
                   </CardContent>
                 </Card>
@@ -427,8 +427,8 @@ const LandingHero = () => {
                     </p>
                     <p className="text-muted-foreground">
                       The structured platform helps me provide better guidance,
-                      and I&apos;ve watched several of my mentees land great jobs.
-                      Rewarding experience!
+                      and I&apos;ve watched several of my mentees land great
+                      jobs. Rewarding experience!
                     </p>
                   </CardContent>
                 </Card>

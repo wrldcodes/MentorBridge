@@ -51,7 +51,7 @@ describe("Auth Pages", () => {
       expect(screen.getByLabelText(/^password/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/confirm password/i)).toBeInTheDocument();
       expect(
-        screen.getByRole("button", { name: /sign up/i }),
+        screen.getByRole("button", { name: /^sign up$/i }),
       ).toBeInTheDocument();
     });
 
