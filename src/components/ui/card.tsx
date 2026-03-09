@@ -17,6 +17,7 @@ function CardStack({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [isStacked, setIsStacked] = React.useState(false);
   const childArray = React.Children.toArray(children);
+  const childCount = childArray.length;
   const [order, setOrder] = React.useState<number[]>(
     childArray.map((_, i) => i),
   );
@@ -36,21 +37,21 @@ function CardStack({
   }, []);
 
   React.useEffect(() => {
-    const nextOrder = childArray.map((_, i) => i);
+    const nextOrder = Array.from({ length: childCount }, (_, i) => i);
     orderRef.current = nextOrder;
     setOrder(nextOrder);
-  }, [childArray.length]);
+  }, [childCount]);
 
   React.useEffect(() => {
     if (!isStacked) {
-      const resetOrder = childArray.map((_, i) => i);
+      const resetOrder = Array.from({ length: childCount }, (_, i) => i);
       orderRef.current = resetOrder;
       setOrder(resetOrder);
       pendingFlipStateRef.current = null;
       isAnimatingRef.current = false;
       setStackHeight(null);
     }
-  }, [isStacked, childArray.length]);
+  }, [isStacked, childCount]);
 
   React.useLayoutEffect(() => {
     if (!isStacked) return;
@@ -71,7 +72,7 @@ function CardStack({
 
       if (!tallestCard) return;
 
-      setStackHeight(tallestCard + (childArray.length - 1) * STACK_OFFSET_PX);
+      setStackHeight(tallestCard + (childCount - 1) * STACK_OFFSET_PX);
     };
 
     measure();
@@ -82,7 +83,7 @@ function CardStack({
     wrappers.forEach((wrapper) => resizeObserver.observe(wrapper));
 
     return () => resizeObserver.disconnect();
-  }, [isStacked, order, childArray.length]);
+  }, [isStacked, order, childCount]);
 
   const handleClick = React.useCallback(() => {
     if (!isStacked || isAnimatingRef.current || orderRef.current.length < 2) {

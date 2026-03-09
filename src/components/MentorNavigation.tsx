@@ -9,7 +9,6 @@ import {
   BarChartIcon,
   SettingsIcon,
   LogOutIcon,
-  MenuIcon,
   PanelLeftClose,
   PanelLeft,
   UserIcon,

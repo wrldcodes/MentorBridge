@@ -19,7 +19,7 @@ export default function FAQPage() {
           <div className="space-y-4 mb-16">
             <FAQItem
               question="What is MentorBridge?"
-              answer="MentorBridge is a platform that connects mentees with experienced mentors. Whether you're looking to develop new skills, navigate career transitions, or achieve specific goals, our platform makes it easy to find the right mentor for your needs."
+              answer="MentorBridge is a platform that connects mentees with experienced mentors. Whether you&apos;re looking to develop new skills, navigate career transitions, or achieve specific goals, our platform makes it easy to find the right mentor for your needs."
             />
 
             <FAQItem
@@ -63,7 +63,7 @@ export default function FAQPage() {
               Still have questions?
             </h2>
             <p className="text-slate-300 mb-8">
-              Can't find the answer you're looking for? Our team is here to
+              Can&apos;t find the answer you&apos;re looking for? Our team is here to
               help.
             </p>
             <Link

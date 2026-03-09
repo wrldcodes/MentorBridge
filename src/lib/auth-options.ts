@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       if (!user?.email) return false;
 
       const cookieStore = await cookies();

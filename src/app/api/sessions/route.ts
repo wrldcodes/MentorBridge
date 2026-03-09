@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
 
 // Mentor: list own sessions | Mentee: list own sessions
-export async function GET(req: NextRequest) {
+export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {

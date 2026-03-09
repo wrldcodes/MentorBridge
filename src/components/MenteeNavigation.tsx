@@ -8,7 +8,6 @@ import {
   MessageSquareIcon,
   SettingsIcon,
   LogOutIcon,
-  MenuIcon,
   PanelLeftClose,
   PanelLeft,
   UserIcon,

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { Role } from "@prisma/client";
+import { Prisma, Role } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   const q = searchParams.get("q") ?? "";
   const skills = searchParams.getAll("skills");
 
-  const where: any = {
+  const where: Prisma.UserWhereInput = {
     role: Role.MENTOR,
   };
 
