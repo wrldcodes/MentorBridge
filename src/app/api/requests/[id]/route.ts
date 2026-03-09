@@ -6,8 +6,9 @@ import { RequestStatus, Role } from "@prisma/client";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
@@ -41,7 +42,7 @@ export async function PATCH(
   }
 
   const requestRecord = await prisma.request.findUnique({
-    where: { id: params.id },
+    where: { id },
     select: {
       id: true,
       mentorId: true,
