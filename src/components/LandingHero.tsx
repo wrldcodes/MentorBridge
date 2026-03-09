@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import {
+  CardStack,
   Card,
   CardContent,
   CardDescription,
@@ -74,7 +75,7 @@ const LandingHero = () => {
 
       {/* Features Section */}
       <section className="mt-32 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <CardStack className="md:gap-6">
           {/* Feature 1 */}
           <Card className="bg-card/70 border-border">
             <CardHeader>
@@ -155,7 +156,7 @@ const LandingHero = () => {
               </p>
             </CardContent>
           </Card>
-        </div>
+        </CardStack>
       </section>
       <section className="mt-12 md:mt-24 relative w-full overflow-hidden rounded-2xl">
         <Image

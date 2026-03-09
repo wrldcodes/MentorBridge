@@ -108,27 +108,35 @@ export default function SignUpPage() {
           <CardTitle>Sign Up</CardTitle>
           <CardDescription>Create your account</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 ">
           <form action={formAction} className="space-y-4">
             <input type="hidden" name="role" value={selectedRole} />
-            <div className="space-y-2">
+            <div className="space-y-2 ">
               <label className="text-sm font-medium text-foreground">
                 I want to sign up as:
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 pt-2 gap-2 ">
                 <Button
                   type="button"
-                  variant={selectedRole === "MENTEE" ? "secondary" : "outline"}
+                  variant="outline"
                   onClick={() => handleRoleSelection("MENTEE")}
-                  className="w-full"
+                  className={`w-full ${
+                    selectedRole === "MENTEE"
+                      ? "bg-white text-black border-white hover:bg-white/90 hover:text-black dark:bg-white dark:text-black dark:border-white dark:hover:bg-white/90"
+                      : ""
+                  }`}
                 >
                   Sign up as Mentee
                 </Button>
                 <Button
                   type="button"
-                  variant={selectedRole === "MENTOR" ? "secondary" : "outline"}
+                  variant="outline"
                   onClick={() => handleRoleSelection("MENTOR")}
-                  className="w-full"
+                  className={`w-full ${
+                    selectedRole === "MENTOR"
+                      ? "bg-white text-black border-white hover:bg-white/90 hover:text-black dark:bg-white dark:text-black dark:border-white dark:hover:bg-white/90"
+                      : ""
+                  }`}
                 >
                   Sign up as Mentor
                 </Button>

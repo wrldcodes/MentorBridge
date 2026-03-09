@@ -138,6 +138,31 @@ body {
     font-family: "Krona One", serif;
     font-weight: 400;
   }
+
+  /* Override default select option styling */
+  select {
+    color-scheme: light;
+  }
+  select option {
+    background-color: white;
+    color: black;
+  }
+  select option:checked {
+    background-color: #f3f4f6;
+    color: black;
+  }
+
+  .dark select {
+    color-scheme: dark;
+  }
+  .dark select option {
+    background-color: #1a1a1a;
+    color: white;
+  }
+  .dark select option:checked {
+    background-color: #27272a;
+    color: white;
+  }
 }
 
 @layer utilities {

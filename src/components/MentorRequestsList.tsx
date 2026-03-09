@@ -29,7 +29,7 @@ export function MentorRequestsList({
       <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Requests</h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm pt-2 text-muted-foreground">
             Review and respond to incoming mentorship requests.
           </p>
         </div>

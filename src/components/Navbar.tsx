@@ -50,7 +50,7 @@ const Navbar = () => {
             backdropFilter: "blur(12px)",
             ease: "power2.out",
             duration: 0.8,
-            
+
             scrollTrigger: {
               trigger: document.body,
               start: "50px top",
@@ -68,14 +68,20 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50">
-      <nav ref={navRef} className="landing-navbar landing-navbar--scrollable">
+      <nav
+        ref={navRef}
+        className="landing-navbar landing-navbar--scrollable overflow-hidden"
+      >
         <div
           ref={bgRef}
           className="landing-navbar__bg pointer-events-none absolute inset-0 rounded-3xl "
           aria-hidden
         />
-        <div className="container relative z-10 mx-auto flex h-16 items-center justify-between px-6">
-          <Link href="/" className="text-white dark:text-black font-krona">
+        <div className="relative z-10 mx-auto flex h-16 w-full items-center justify-between gap-2 px-3 sm:px-4 md:container md:px-6">
+          <Link
+            href="/"
+            className="min-w-0 truncate text-sm text-white dark:text-black sm:text-base font-krona"
+          >
             MentorBridge
           </Link>
           <nav className="hidden md:flex gap-6">
@@ -98,21 +104,23 @@ const Navbar = () => {
               FAQ
             </Link>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <div className="flex items-center space-x-4">
-              <Link href="/signin">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link href="/signin" className="hidden sm:block">
                 <Button
                   className="text-white border-white/40 bg-transparent hover:text-white hover:bg-white/15 dark:text-black dark:border-black/30 dark:bg-transparent dark:hover:text-black dark:hover:bg-black/10"
                   variant="outline"
+                  size="sm"
                 >
                   Sign in
                 </Button>
               </Link>
               <Link href="/signup">
                 <Button
-                  className="bg-white text-black hover:bg-gray-100 dark:bg-black dark:text-white dark:hover:bg-gray-900"
+                  className="bg-white px-3 text-black hover:bg-gray-100 dark:bg-black dark:text-white dark:hover:bg-gray-900 sm:px-4"
                   variant="secondary"
+                  size="sm"
                 >
                   Sign up
                 </Button>

@@ -33,9 +33,6 @@ vi.mock("@/app/action/auth", () => ({
 const nextAuthSignInMock = vi.mocked(nextAuthSignIn);
 
 describe("SignUpPage", () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let actionStateSpy: any;
-
   beforeEach(() => {
     mockRoleParam = null;
     document.cookie =
@@ -43,19 +40,6 @@ describe("SignUpPage", () => {
     push.mockReset();
     nextAuthSignInMock.mockClear();
     nextAuthSignInMock.mockResolvedValue({} as any);
-    actionStateSpy = vi.spyOn(React, "useActionState").mockReturnValue([
-      {
-        success: false,
-        message: "",
-        errors: undefined,
-      },
-      vi.fn(),
-      false,
-    ]);
-  });
-
-  afterEach(() => {
-    actionStateSpy.mockRestore();
   });
 
   it("defaults hidden role input to MENTEE when no query param provided", () => {

@@ -11,9 +11,16 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getAuthenticatedUser } from "@/hooks/useAuthenticatedUser";
+import { getMenteeDashboardStats } from "@/hooks/useMenteeDashboardStats";
 
 export default async function MenteeDashboardPage() {
   const user = await getAuthenticatedUser();
+  const {
+    sessionsToday,
+    pendingRequestsCount,
+    activeMentorCount,
+    mentorCount,
+  } = await getMenteeDashboardStats(user?.id);
 
   return (
     <div className="p-1">
@@ -34,7 +41,7 @@ export default async function MenteeDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="stat-value">0</p>
+              <p className="stat-value">{sessionsToday}</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -49,7 +56,7 @@ export default async function MenteeDashboardPage() {
               <CardDescription>Mentors currently guiding you</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="stat-value">0</p>
+              <p className="stat-value">{activeMentorCount}</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -66,7 +73,7 @@ export default async function MenteeDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="stat-value">0</p>
+              <p className="stat-value">{pendingRequestsCount}</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">
@@ -81,7 +88,7 @@ export default async function MenteeDashboardPage() {
               <CardDescription>Browse and connect with mentors</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="stat-value">24+</p>
+              <p className="stat-value">{mentorCount}</p>
             </CardContent>
             <CardFooter>
               <Button asChild variant="outline" size="sm">

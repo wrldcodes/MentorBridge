@@ -48,7 +48,7 @@ export function MentorSessionsList({
           onChange={(e) =>
             setStatusFilter(e.target.value as "all" | SessionStatus)
           }
-          className="form-input w-40"
+          className="rounded-lg border border-gray-300 dark:border-white/20 bg-white dark:bg-[#1a1a1a] px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 hover:border-gray-400 dark:hover:border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors w-40"
         >
           <option value="all">All</option>
           <option value="SCHEDULED">Scheduled</option>

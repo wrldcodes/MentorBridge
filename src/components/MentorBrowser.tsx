@@ -74,11 +74,12 @@ export function MentorBrowser({
           filteredMentors.map((mentor) => (
             <Card key={mentor.id} className="flex flex-col justify-between">
               <CardHeader>
+                
                 <CardTitle className="flex items-center justify-between gap-2">
                   <span>{mentor.name ?? "Unnamed Mentor"}</span>
                 </CardTitle>
                 <CardDescription>
-                  {mentor.bio || "This mentor hasn't added a bio yet."}
+                  {mentor.bio }
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
