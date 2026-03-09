@@ -71,7 +71,7 @@ describe("SignUpPage", () => {
 
     expect(document.cookie).toContain("pending_role=MENTOR");
     expect(vi.mocked(nextAuthSignIn)).toHaveBeenCalledWith("google", {
-      callbackUrl: "/dashboard",
+      callbackUrl: "/api/auth/check-profile",
       role: "mentor",
     });
   });
