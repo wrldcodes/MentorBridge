@@ -30,7 +30,7 @@ const LandingHero = () => {
       <h2 className="font-krona text-5xl md:text-7xl font-bold mb-6 leading-tight text-center">
         Connect with Your Perfect Mentor
       </h2>
-      <p className="text-lg text-muted-foreground mb-8 max-w-2xl text-center">
+      <p className="text-base sm:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl text-center px-1">
         Bridge the gap between ambition and expertise. Find mentors, share
         knowledge, and grow together.
       </p>
@@ -46,20 +46,20 @@ const LandingHero = () => {
           </Button>
         </Link>
       </div>
-      <section className="mt-24">
+      <section className="mt-14 md:mt-24 w-full">
         <Button size="lg" variant="outline">
           Key Features
         </Button>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <h1 className="text-2xl font-bold mb-6">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <h1 className="text-xl sm:text-2xl font-bold mb-2 md:mb-6">
             Why Users Choose MentorBridge
           </h1>
           <div className="max-w-lg">
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">
               Learning and growing in a new career path should be flexible and
               effective.
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-sm sm:text-base text-muted-foreground mb-5 md:mb-6">
               That&apos;s why MentorBridge connects mentees with experienced
               mentors for personalized guidance and support. Whether you&apos;re
               looking to develop new skills, navigate career transitions, or
@@ -74,7 +74,7 @@ const LandingHero = () => {
       </section>
 
       {/* Features Section */}
-      <section className="mt-32 w-full">
+      <section className="mt-16 md:mt-32 w-full">
         <CardStack className="md:gap-6">
           {/* Feature 1 */}
           <Card className="bg-card/70 border-border">
@@ -168,17 +168,21 @@ const LandingHero = () => {
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-[45%_55%] gap-8 items-center">
+        <div className="relative z-10 p-4 sm:p-6 md:p-12 grid grid-cols-1 md:grid-cols-[45%_55%] gap-6 md:gap-8 items-center">
           <div className="max-w-md text-left">
-            <h2 className="text-3xl font-krona font-light mb-4 text-white">
+            <h2 className="text-2xl sm:text-3xl font-krona font-light mb-3 md:mb-4 text-white">
               Join a Thriving Community of Mentors and Mentees
             </h2>
-            <p className="text-slate-200 mb-6">
+            <p className="text-sm sm:text-base text-slate-200 mb-5 md:mb-6">
               As a mentor earn money while sharing your expertise, and as a
               mentee, gain invaluable insights and guidance to accelerate your
               career growth.
             </p>
-            <Button className="mt-4" size="lg" variant="outline">
+            <Button
+              className="mt-2 md:mt-4 w-full sm:w-auto"
+              size="lg"
+              variant="outline"
+            >
               Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -196,10 +200,44 @@ const LandingHero = () => {
                 <path d="m12 5 7 7-7 7" />
               </svg>
             </Button>
-            <p className="text-slate-200 mt-4">
+            <p className="text-slate-200 text-sm sm:text-base mt-4">
               Thousands of users have already experienced power of our App!
             </p>
-            <div className="flex -space-x-3 mt-6">
+            <div className="flex sm:hidden -space-x-2 mt-5">
+              <CardProfilePic className="h-9 w-9 border border-slate-500">
+                <Image
+                  src="/isabella-ekeson.jpg"
+                  alt="profile picture of Isabella Ekeson"
+                  width={36}
+                  height={36}
+                  className="rounded-full object-cover"
+                />
+              </CardProfilePic>
+              <CardProfilePic className="h-9 w-9 border border-slate-500">
+                <Image
+                  src="/Ruth-anderson.jpg"
+                  alt="profile picture of Ruth Anderson"
+                  width={36}
+                  height={36}
+                  className="rounded-full object-cover"
+                />
+              </CardProfilePic>
+              <CardProfilePic className="h-9 w-9 border border-slate-500">
+                <Image
+                  src="/bryanqueen.png"
+                  alt="profile picture of Bryan Queen"
+                  width={36}
+                  height={36}
+                  className="rounded-full object-cover"
+                />
+              </CardProfilePic>
+              <CardProfilePic className="h-9 w-9 border border-slate-500">
+                <span className="flex font-medium items-center justify-center w-full h-full bg-white text-black text-[10px] rounded-full">
+                  +1k
+                </span>
+              </CardProfilePic>
+            </div>
+            <div className="hidden sm:flex flex-wrap -space-x-3 mt-5 md:mt-6">
               <CardProfilePic>
                 <Image
                   src="/isabella-ekeson.jpg"
@@ -271,11 +309,11 @@ const LandingHero = () => {
         </div>
       </section>
       <section className="mt-12 md:mt-24 w-full">
-        <div className="mb-8 text-center max-w-2xl mx-auto px-6">
+        <div className="mb-8 text-center max-w-2xl mx-auto px-2 sm:px-6">
           <Button className="mb-8" size="lg" variant="outline">
             Testimonials
           </Button>
-          <h2 className="font-krona text-4xl md:text-6xl font-light mb-6 leading-tight">
+          <h2 className="font-krona text-2xl sm:text-4xl md:text-6xl font-light mb-4 md:mb-6 leading-tight">
             What Our Users Are Saying
           </h2>
           <p className="text-muted-foreground">
@@ -283,11 +321,11 @@ const LandingHero = () => {
             careers with MentorBridge.
           </p>
         </div>
-        <div className="w-full max-w-6xl mx-auto px-12">
+        <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 md:px-12">
           <Carousel className="w-full">
             <CarouselContent>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -324,7 +362,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -360,7 +398,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -397,7 +435,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -434,7 +472,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -470,7 +508,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full">
+                <Card className="bg-card/70 border-border h-full overflow-hidden">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
