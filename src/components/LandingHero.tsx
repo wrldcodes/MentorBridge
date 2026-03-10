@@ -105,7 +105,7 @@ const LandingHero = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <Image
-                src="/flexible-learning.jpg"
+                src="/Flexible-Learning.jpg"
                 alt="Flexible Learning"
                 width={400}
                 height={192}
@@ -158,7 +158,7 @@ const LandingHero = () => {
           </Card>
         </CardStack>
       </section>
-      <section className="mt-12 md:mt-24 relative w-full overflow-hidden rounded-2xl">
+      <section className="mt-12   md:mt-24 relative w-full overflow-hidden rounded-2xl">
         <Image
           src="/hero-bgg.jpg"
           alt="Background"
@@ -168,7 +168,7 @@ const LandingHero = () => {
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-[38%_62%] gap-8 items-center">
+        <div className="relative z-10 p-6 md:p-12 grid grid-cols-1 md:grid-cols-[45%_55%] gap-8 items-center">
           <div className="max-w-md text-left">
             <h2 className="text-3xl font-krona font-light mb-4 text-white">
               Join a Thriving Community of Mentors and Mentees
@@ -252,7 +252,7 @@ const LandingHero = () => {
               </CardProfilePic>
             </div>
           </div>
-          <div className="hidden -space-x-3 md:flex flex-row  justify-end items-center">
+          <div className="hidden md:flex md:justify-center lg:justify-end md:items-center md:gap-4 lg:-space-x-3">
             <Image
               src="/mentor-earning.jpg"
               alt="Mentor earning"
@@ -265,7 +265,7 @@ const LandingHero = () => {
               alt="Dashboard earning"
               width={300}
               height={260}
-              className="rounded-2xl object-cover shadow-2xl -translate-y-14 flex-shrink-0"
+              className="hidden lg:block rounded-2xl object-cover shadow-2xl -translate-y-14 flex-shrink-0"
             />
           </div>
         </div>
