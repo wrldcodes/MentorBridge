@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MentorBridge
+
+A modern mentorship platform that matches mentees with mentors for guided career growth, structured requests, and session scheduling.
+
+## Overview
+
+MentorBridge provides a full mentorship workflow:
+
+- Role-based onboarding (Mentee / Mentor / Admin)
+- Mentor discovery and request flow
+- Request acceptance/rejection lifecycle
+- Mentor availability management
+- Session booking and tracking
+- Profile management and authentication
+
+This repository is built as a production-ready Next.js App Router application with Prisma, NextAuth, and a tested React component/hook architecture.
+
+## Tech Stack
+
+### Frontend
+
+- Next.js (App Router, TypeScript)
+- React 19
+- Tailwind CSS
+- GSAP (animations)
+- Lucide React (icons)
+
+### Backend & Data
+
+- Next.js Route Handlers (API endpoints)
+- Prisma ORM
+- PostgreSQL
+- NextAuth (Credentials + Google OAuth)
+
+### Testing & Quality
+
+- Vitest
+- React Testing Library
+- ESLint + TypeScript strict checks
+
+## Key Features
+
+- **Auth & Access Control**
+  - Credentials and Google sign-in
+  - Role-aware redirects and protected routes
+
+- **Mentee Experience**
+  - Browse mentors with filters
+  - Send mentorship requests
+  - Book sessions from available mentor slots
+  - Track pending requests and active mentors on dashboard
+
+- **Mentor Experience**
+  - Manage incoming mentee requests
+  - Set and update availability
+  - Manage sessions and mentee interactions
+
+- **Dashboard & UI**
+  - Role-specific navigation and pages
+  - Responsive landing experience
+  - Light and dark theme support
+
 
 ## Getting Started
 
-First, run the development server:
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Configure environment variables
+
+Create `.env` in the project root with required values:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
+```
+
+### 3) Generate Prisma client and run migrations
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+### 4) Start development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Start dev server (Turbopack)
+npm run build    # Prisma generate + production build
+npm run start    # Start production server
+npm run lint     # Lint checks
+npm run test     # Run Vitest suite
+```
 
-## Learn More
+## Testing
 
-To learn more about Next.js, take a look at the following resources:
+The project includes unit and component coverage for hooks, UI, and key page flows.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run all tests:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run test
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Designed for Vercel deployment with Prisma + PostgreSQL.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Notes:
+
+- `postinstall` and `build` scripts run `prisma generate` to avoid stale client issues in cached CI environments.
+- Ensure production environment variables are configured (`DATABASE_URL`, `NEXTAUTH_SECRET`, OAuth keys).
+
+
