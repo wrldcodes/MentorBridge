@@ -5,8 +5,8 @@ export type AvailabilitySlotItem = {
   dayOfWeek: number;
   startTime: string;
   endTime: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
 };
 
 export function useMentorAvailabilityManager(

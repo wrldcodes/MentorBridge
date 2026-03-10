@@ -60,11 +60,12 @@
  */
 
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import type { RefObject } from "react";
 
 // Register the useGSAP hook with GSAP core (once per app).
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type GSAPContext = {
   gsap: typeof gsap;

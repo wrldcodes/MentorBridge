@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useActionState } from "react";
+import { Suspense, useActionState } from "react";
 import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
 import { signIn, ActionResponse, getPostAuthRedirect } from "@/app/action/auth";
@@ -20,7 +20,7 @@ const initialState: ActionResponse = {
   errors: undefined,
 };
 
-export default function LoginPage() {
+function LoginPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -175,5 +175,13 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginPageContent />
+    </Suspense>
   );
 }

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useActionState, useState } from "react";
+import { Suspense, useActionState, useState } from "react";
 import { signIn as nextAuthSignIn } from "next-auth/react";
 import Link from "next/link";
 import { signUp, type ActionResponse } from "@/app/action/auth";
@@ -22,7 +22,7 @@ const initialState: ActionResponse = {
 
 type RoleOption = "MENTOR" | "MENTEE";
 
-export default function SignUpPage() {
+function SignUpPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const roleParam = searchParams.get("role");
@@ -278,5 +278,13 @@ export default function SignUpPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignUpPageContent />
+    </Suspense>
   );
 }
