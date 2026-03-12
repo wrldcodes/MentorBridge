@@ -58,7 +58,7 @@ export default function MenteeNavigation() {
                       isActive && "bg-accent",
                     )}
                   >
-                    <Icon size={20} className="mr-3" />
+                    <Icon size={18} className="mr-3" />
                     {item.label}
                   </Link>
                 );
@@ -69,7 +69,7 @@ export default function MenteeNavigation() {
                 onClick={() => signOut()}
                 className="w-full flex items-center px-2 py-2 text-label rounded-md interactive"
               >
-                <LogOutIcon size={20} className="mr-3" />
+                <LogOutIcon size={18} className="mr-3" />
                 Sign Out
               </button>
             </div>
@@ -105,13 +105,13 @@ export default function MenteeNavigation() {
             {isOpen ? (
               <>
                 <PanelLeftClose
-                  size={20}
+                  size={18}
                   className="mr-3 text-gray-400 dark:text-gray-500"
                 />
                 <span className="text-sm font-medium">Collapse</span>
               </>
             ) : (
-              <PanelLeft size={28} strokeWidth={1.5} />
+              <PanelLeft size={24} strokeWidth={1.5} />
             )}
           </button>
 
@@ -132,7 +132,7 @@ export default function MenteeNavigation() {
                   )}
                   title={item.label}
                 >
-                  <Icon size={28} strokeWidth={1.5} />
+                  <Icon size={24} strokeWidth={1.5} />
                 </Link>
               );
             }
@@ -149,7 +149,7 @@ export default function MenteeNavigation() {
                 )}
               >
                 <Icon
-                  size={20}
+                  size={18}
                   className="mr-3 text-gray-400 dark:text-gray-500"
                 />
                 {item.label}
@@ -174,7 +174,7 @@ export default function MenteeNavigation() {
             title="Sign Out"
           >
             <LogOutIcon
-              size={isOpen ? 20 : 28}
+              size={isOpen ? 18 : 24}
               strokeWidth={1.5}
               className={isOpen ? "mr-3 text-gray-400 dark:text-gray-500" : ""}
             />

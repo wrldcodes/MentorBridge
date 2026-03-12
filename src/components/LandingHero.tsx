@@ -41,7 +41,11 @@ const LandingHero = () => {
           </Button>
         </Link>
         <Link href="/signup?role=mentor">
-          <Button size="lg" variant="secondary">
+          <Button
+            size="lg"
+            variant="secondary"
+            className="bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 border border-black/10 dark:border-white/10"
+          >
             Become a Mentor
           </Button>
         </Link>
@@ -66,7 +70,11 @@ const LandingHero = () => {
               achieve specific goals, our platform makes it easy to find the
               right mentor for your needs.
             </p>
-            <Button className="rounded-full" size="lg" variant="secondary">
+            <Button
+              className="rounded-full bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 border border-black/10 dark:border-white/10"
+              size="lg"
+              variant="secondary"
+            >
               Learn More
             </Button>
           </div>
