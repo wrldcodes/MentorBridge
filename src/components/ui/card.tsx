@@ -65,14 +65,14 @@ function CardStack({
     if (!wrappers.length) return;
 
     const measure = () => {
-      const tallestCard = wrappers.reduce(
-        (maxHeight, wrapper) => Math.max(maxHeight, wrapper.offsetHeight),
-        0,
+      const activeCardHeight = wrappers[0]?.offsetHeight ?? 0;
+      const visibleCardsCount = wrappers.length;
+
+      if (!activeCardHeight) return;
+
+      setStackHeight(
+        activeCardHeight + (visibleCardsCount - 1) * STACK_OFFSET_PX,
       );
-
-      if (!tallestCard) return;
-
-      setStackHeight(tallestCard + (childCount - 1) * STACK_OFFSET_PX);
     };
 
     measure();
@@ -165,6 +165,13 @@ function CardStack({
         }}
       >
         {order.map((originalIndex, stackPos) => {
+          const hideInitialCardUntilWrap =
+            originalIndex === 0 && order[0] !== 0 && stackPos > 0;
+
+          if (hideInitialCardUntilWrap) {
+            return null;
+          }
+
           const isTop = stackPos === 0;
           const translateY = stackPos * STACK_OFFSET_PX;
           const scale = 1 - stackPos * 0.02;

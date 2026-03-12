@@ -37,7 +37,7 @@ export default function DashboardHeader() {
       <div className="flex items-center gap-4">
         {/* Theme Toggle - Mobile */}
         <div className="md:hidden">
-          <ThemeToggle showLabel showThemeName />
+          <ThemeToggle />
         </div>
 
         {/* Theme Toggle - Desktop */}

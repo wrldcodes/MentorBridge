@@ -46,8 +46,8 @@ const LandingHero = () => {
           </Button>
         </Link>
       </div>
-      <section className="mt-14 md:mt-24 w-full">
-        <Button size="lg" variant="outline">
+      <section className="mt-20 md:mt-24 w-full">
+        <Button className="mx-auto md:mx-0 flex" size="lg" variant="outline">
           Key Features
         </Button>
         <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -74,7 +74,7 @@ const LandingHero = () => {
       </section>
 
       {/* Features Section */}
-      <section className="mt-16 md:mt-32 w-full">
+      <section className="mt-20 md:mt-24 w-full">
         <CardStack className="md:gap-6">
           {/* Feature 1 */}
           <Card className="bg-card/70 border-border">
@@ -178,65 +178,33 @@ const LandingHero = () => {
               mentee, gain invaluable insights and guidance to accelerate your
               career growth.
             </p>
-            <Button
-              className="mt-2 md:mt-4 w-full sm:w-auto"
-              size="lg"
-              variant="outline"
-            >
-              Get Started
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="ml-2"
+            <Link href="/signup">
+              <Button
+                className="mt-2 md:mt-4 w-full sm:w-auto"
+                size="lg"
+                variant="outline"
               >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </Button>
-            <p className="text-slate-200 text-sm sm:text-base mt-4">
+                Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-2"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Button>
+            </Link>
+            <p className="hidden text-slate-200 text-sm sm:text-base mt-4">
               Thousands of users have already experienced power of our App!
             </p>
-            <div className="flex sm:hidden -space-x-2 mt-5">
-              <CardProfilePic className="h-9 w-9 border border-slate-500">
-                <Image
-                  src="/isabella-ekeson.jpg"
-                  alt="profile picture of Isabella Ekeson"
-                  width={36}
-                  height={36}
-                  className="rounded-full object-cover"
-                />
-              </CardProfilePic>
-              <CardProfilePic className="h-9 w-9 border border-slate-500">
-                <Image
-                  src="/Ruth-anderson.jpg"
-                  alt="profile picture of Ruth Anderson"
-                  width={36}
-                  height={36}
-                  className="rounded-full object-cover"
-                />
-              </CardProfilePic>
-              <CardProfilePic className="h-9 w-9 border border-slate-500">
-                <Image
-                  src="/bryanqueen.png"
-                  alt="profile picture of Bryan Queen"
-                  width={36}
-                  height={36}
-                  className="rounded-full object-cover"
-                />
-              </CardProfilePic>
-              <CardProfilePic className="h-9 w-9 border border-slate-500">
-                <span className="flex font-medium items-center justify-center w-full h-full bg-white text-black text-[10px] rounded-full">
-                  +1k
-                </span>
-              </CardProfilePic>
-            </div>
             <div className="hidden sm:flex flex-wrap -space-x-3 mt-5 md:mt-6">
               <CardProfilePic>
                 <Image
@@ -290,7 +258,7 @@ const LandingHero = () => {
               </CardProfilePic>
             </div>
           </div>
-          <div className="hidden md:flex md:justify-center lg:justify-end md:items-center md:gap-4 lg:-space-x-3">
+          <div className="hidden md:flex md:justify-center lg:justify-end md:items-center md:gap-4 lg:-space-x-5">
             <Image
               src="/mentor-earning.jpg"
               alt="Mentor earning"
@@ -325,7 +293,7 @@ const LandingHero = () => {
           <Carousel className="w-full">
             <CarouselContent>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -362,7 +330,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -398,7 +366,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -435,7 +403,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -472,7 +440,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
@@ -508,7 +476,7 @@ const LandingHero = () => {
                 </Card>
               </CarouselItem>
               <CarouselItem className="md:basis-1/3">
-                <Card className="bg-card/70 border-border h-full overflow-hidden">
+                <Card className="bg-card/70 border-border h-full">
                   <CardTestimonialHeader
                     profilePic={
                       <CardProfilePic>
