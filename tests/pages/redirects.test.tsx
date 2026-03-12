@@ -3,7 +3,9 @@ import MentorRootPage from "@/app/mentor/page";
 import MenteeRootPage from "@/app/mentee/page";
 import ProfilePage from "@/app/profile/page";
 
-const redirectMock = vi.fn();
+const { redirectMock } = vi.hoisted(() => ({
+  redirectMock: vi.fn(),
+}));
 
 vi.mock("next/navigation", () => ({
   redirect: redirectMock,

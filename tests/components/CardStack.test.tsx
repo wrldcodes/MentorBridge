@@ -2,9 +2,11 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Card, CardStack } from "@/components/ui/card";
 
-const registerPlugin = vi.fn();
-const flipGetState = vi.fn(() => ({ state: true }));
-const flipFrom = vi.fn();
+const { registerPlugin, flipGetState, flipFrom } = vi.hoisted(() => ({
+  registerPlugin: vi.fn(),
+  flipGetState: vi.fn(() => ({ state: true })),
+  flipFrom: vi.fn(),
+}));
 
 vi.mock("gsap", () => ({
   default: {
