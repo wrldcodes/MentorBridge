@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import React from "react";
 import Link from "next/link";
 import { CheckCircle2, XCircle } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description:
+    "Simple, transparent pricing for mentees and mentors on MentorBridge. Start for free as a mentee or choose a premium plan for advanced features.",
+  alternates: {
+    canonical: "https://mentorbridge.vercel.app/pricing",
+  },
+  openGraph: {
+    title: "Pricing | MentorBridge",
+    description:
+      "Simple, transparent pricing for mentees and mentors on MentorBridge. Start for free as a mentee or choose a premium plan for advanced features.",
+    url: "https://mentorbridge.vercel.app/pricing",
+  },
+};
 
 export default function PricingPage() {
   return (

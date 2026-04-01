@@ -1,81 +1,112 @@
+import type { Metadata } from "next";
 import React from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { FAQPageJsonLd } from "@/components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "FAQ",
+  description:
+    "Frequently asked questions about MentorBridge – how it works, pricing, sessions, certifications, data security, and more.",
+  alternates: {
+    canonical: "https://mentorbridge.vercel.app/faq",
+  },
+  openGraph: {
+    title: "FAQ | MentorBridge",
+    description:
+      "Frequently asked questions about MentorBridge – how it works, pricing, sessions, certifications, data security, and more.",
+    url: "https://mentorbridge.vercel.app/faq",
+  },
+};
+
+const faqs = [
+  {
+    question: "What is MentorBridge?",
+    answer:
+      "MentorBridge is a platform that connects mentees with experienced mentors. Whether you're looking to develop new skills, navigate career transitions, or achieve specific goals, our platform makes it easy to find the right mentor for your needs.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Simply sign up as either a mentee or mentor. Mentees can browse mentor profiles and request sessions, while mentors can create their profile and start accepting mentee requests.",
+  },
+  {
+    question: "What does it cost?",
+    answer:
+      "Mentees can use our platform for free. Mentors start with a free tier, with paid plans available for additional features like advanced analytics and certification management.",
+  },
+  {
+    question: "How do sessions work?",
+    answer:
+      "Sessions are scheduled one-on-one meetings between mentors and mentees. You can communicate through our secure messaging platform and schedule sessions that work for both parties.",
+  },
+  {
+    question: "Can I get certified?",
+    answer:
+      "Yes! Upon completing mentorship programs, mentees can earn recognized certificates to boost their professional profile and showcase their achievements.",
+  },
+  {
+    question: "How do mentors earn money?",
+    answer:
+      "Mentors can earn money through their mentor subscription plans. Premium mentor plans offer higher earning potential with additional features and support.",
+  },
+  {
+    question: "Is my data secure?",
+    answer:
+      "Yes, we take security seriously. All conversations and personal data are encrypted and protected. We comply with industry-standard security practices.",
+  },
+  {
+    question: "Can I cancel my subscription?",
+    answer:
+      "Yes, you can cancel your subscription at any time. There are no long-term commitments or hidden fees.",
+  },
+];
 
 export default function FAQPage() {
   return (
-    <div className="min-h-screen bg-background text-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl text-slate-300">
-              Find answers to common questions about MentorBridge
-            </p>
-          </div>
+    <>
+      <FAQPageJsonLd faqs={faqs} />
+      <div className="min-h-screen bg-background text-white">
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-16">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                Frequently Asked Questions
+              </h1>
+              <p className="text-xl text-slate-300">
+                Find answers to common questions about MentorBridge
+              </p>
+            </div>
 
-          <div className="space-y-4 mb-16">
-            <FAQItem
-              question="What is MentorBridge?"
-              answer="MentorBridge is a platform that connects mentees with experienced mentors. Whether you're looking to develop new skills, navigate career transitions, or achieve specific goals, our platform makes it easy to find the right mentor for your needs."
-            />
+            <div className="space-y-4 mb-16">
+              {faqs.map((faq) => (
+                <FAQItem
+                  key={faq.question}
+                  question={faq.question}
+                  answer={faq.answer}
+                />
+              ))}
+            </div>
 
-            <FAQItem
-              question="How do I get started?"
-              answer="Simply sign up as either a mentee or mentor. Mentees can browse mentor profiles and request sessions, while mentors can create their profile and start accepting mentee requests."
-            />
-
-            <FAQItem
-              question="What does it cost?"
-              answer="Mentees can use our platform for free. Mentors start with a free tier, with paid plans available for additional features like advanced analytics and certification management."
-            />
-
-            <FAQItem
-              question="How do sessions work?"
-              answer="Sessions are scheduled one-on-one meetings between mentors and mentees. You can communicate through our secure messaging platform and schedule sessions that work for both parties."
-            />
-
-            <FAQItem
-              question="Can I get certified?"
-              answer="Yes! Upon completing mentorship programs, mentees can earn recognized certificates to boost their professional profile and showcase their achievements."
-            />
-
-            <FAQItem
-              question="How do mentors earn money?"
-              answer="Mentors can earn money through their mentor subscription plans. Premium mentor plans offer higher earning potential with additional features and support."
-            />
-
-            <FAQItem
-              question="Is my data secure?"
-              answer="Yes, we take security seriously. All conversations and personal data are encrypted and protected. We comply with industry-standard security practices."
-            />
-
-            <FAQItem
-              question="Can I cancel my subscription?"
-              answer="Yes, you can cancel your subscription at any time. There are no long-term commitments or hidden fees."
-            />
-          </div>
-
-          <div className="max-w-2xl mx-auto text-center bg-slate-800 rounded-lg p-8">
-            <h2 className="text-2xl font-bold mb-4 text-white">
-              Still have questions?
-            </h2>
-            <p className="text-slate-300 mb-8">
-              Can&apos;t find the answer you&apos;re looking for? Our team is
-              here to help.
-            </p>
-            <Link
-              href="mailto:support@mentorbridge.com"
-              className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 py-2 text-sm font-medium text-black shadow transition-colors hover:bg-gray-100"
-            >
-              Contact Support
-            </Link>
+            <div className="max-w-2xl mx-auto text-center bg-slate-800 rounded-lg p-8">
+              <h2 className="text-2xl font-bold mb-4 text-white">
+                Still have questions?
+              </h2>
+              <p className="text-slate-300 mb-8">
+                Can&apos;t find the answer you&apos;re looking for? Our team is
+                here to help.
+              </p>
+              <Link
+                href="mailto:support@mentorbridge.com"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-white px-8 py-2 text-sm font-medium text-black shadow transition-colors hover:bg-gray-100"
+              >
+                Contact Support
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
