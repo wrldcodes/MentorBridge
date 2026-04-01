@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
 import React from "react";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Features",
+  description:
+    "Explore MentorBridge features: find expert mentors, flexible scheduling, secure messaging, progress tracking, certifications, and community support.",
+  alternates: {
+    canonical: "https://mentorbridge.vercel.app/features",
+  },
+  openGraph: {
+    title: "Features | MentorBridge",
+    description:
+      "Explore MentorBridge features: find expert mentors, flexible scheduling, secure messaging, progress tracking, certifications, and community support.",
+    url: "https://mentorbridge.vercel.app/features",
+  },
+};
 
 export default function FeaturesPage() {
   return (
